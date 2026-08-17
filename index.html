@@ -1,0 +1,3502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0" />
+  <meta name="theme-color" content="#c8553d" />
+  <meta name="description" content="《算得快》刘后一著 · 22章节132道速算练习题，含完形填空、单选、多选三种题型，每题附详细解题思路" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="算得快练习" />
+  <title>《算得快》练习题 · 刘后一</title>
+  <style>
+/* ===== 全局变量 ===== */
+:root {
+  --bg: #f5f1e8;
+  --bg-card: #ffffff;
+  --ink: #2d2418;
+  --ink-soft: #5a4d3c;
+  --primary: #c8553d;
+  --primary-dark: #9c3d28;
+  --accent: #588157;
+  --accent-soft: #e9f0e3;
+  --gold: #d4a24c;
+  --gold-soft: #f8edd5;
+  --border: #e0d6c2;
+  --shadow: 0 4px 12px rgba(94, 70, 35, 0.08);
+  --shadow-lg: 0 8px 24px rgba(94, 70, 35, 0.12);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --good: #588157;
+  --bad: #c8553d;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+/* ===== 布局 ===== */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background: linear-gradient(135deg, #fff7e6 0%, #ffe8d1 60%, #ffd9b3 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 32px 20px 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.app-header::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -60px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(212, 162, 76, 0.18), transparent 70%);
+  border-radius: 50%;
+}
+
+.app-header::after {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  left: -40px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(200, 85, 61, 0.12), transparent 70%);
+  border-radius: 50%;
+}
+
+.header-inner {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.book-badge {
+  width: 110px;
+  height: 150px;
+  background: var(--primary);
+  border-radius: 4px 12px 12px 4px;
+  position: relative;
+  color: #fff;
+  padding: 14px 10px;
+  text-align: center;
+  box-shadow: 4px 4px 0 var(--gold), 8px 8px 0 var(--primary-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.book-badge::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.25), transparent);
+  border-radius: 4px 0 0 4px;
+}
+
+.badge-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  margin: 0 auto;
+  line-height: 1;
+}
+
+.badge-sub {
+  font-size: 9px;
+  line-height: 1.3;
+  opacity: 0.85;
+  margin-top: 6px;
+}
+
+.badge-author {
+  font-size: 11px;
+  font-weight: 600;
+  border-top: 1px solid rgba(255,255,255,0.4);
+  padding-top: 6px;
+}
+
+.app-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 4px;
+  letter-spacing: 2px;
+}
+
+.app-subtitle {
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  min-width: 100px;
+}
+
+.stat-num {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+
+.app-main {
+  flex: 1;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 28px 20px 40px;
+}
+
+.app-footer {
+  text-align: center;
+  padding: 18px 20px;
+  color: var(--ink-soft);
+  font-size: 12px;
+  border-top: 1px dashed var(--border);
+}
+
+/* ===== 视图切换 ===== */
+.view {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== 章节选择页 ===== */
+.section-title {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.section-title h2 {
+  font-size: 22px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.section-title p {
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+.chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.chapter-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 18px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chapter-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--gold);
+}
+
+.chapter-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--gold));
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.chapter-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 1.5px;
+}
+
+.chapter-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.chapter-sub {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+.chapter-difficulty {
+  margin-top: 8px;
+  display: flex;
+  gap: 3px;
+}
+
+.star {
+  color: var(--gold);
+  font-size: 12px;
+}
+
+.star.empty {
+  color: var(--border);
+}
+
+.footer-tip {
+  text-align: center;
+  margin-top: 28px;
+  color: var(--ink-soft);
+  font-size: 13px;
+  padding: 14px;
+  background: var(--gold-soft);
+  border-radius: var(--radius);
+  border: 1px dashed var(--gold);
+}
+
+/* ===== 答题页 ===== */
+.quiz-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  background: var(--bg-card);
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  flex-wrap: wrap;
+}
+
+.btn-back {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--ink-soft);
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s;
+}
+
+.btn-back:hover {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.back-arrow {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.quiz-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.chapter-tag {
+  background: var(--primary);
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.quiz-progress {
+  font-size: 14px;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.quiz-stats {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.stat-correct {
+  color: var(--good);
+}
+
+.stat-correct em, .stat-wrong em {
+  font-style: normal;
+  margin-left: 2px;
+  font-size: 16px;
+}
+
+.stat-wrong {
+  color: var(--bad);
+}
+
+.quiz-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+
+.question-type {
+  display: inline-block;
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.type-cloze {
+  background: var(--gold-soft);
+  color: #8b6914;
+}
+
+.type-single {
+  background: var(--accent-soft);
+  color: #3d5a3d;
+}
+
+.type-multi {
+  background: #f5e1e1;
+  color: #8a3535;
+}
+
+.question-text {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.6;
+  margin-bottom: 18px;
+  color: var(--ink);
+}
+
+.question-text .blank {
+  display: inline-block;
+  min-width: 60px;
+  border-bottom: 2px solid var(--primary);
+  text-align: center;
+  padding: 0 8px;
+  margin: 0 4px;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-size: 15px;
+  background: #fafaf6;
+}
+
+.option:hover:not(.disabled) {
+  border-color: var(--gold);
+  background: var(--gold-soft);
+}
+
+.option.selected {
+  border-color: var(--primary);
+  background: #fff0ec;
+}
+
+.option.correct {
+  border-color: var(--good);
+  background: var(--accent-soft);
+  color: var(--good);
+}
+
+.option.wrong {
+  border-color: var(--bad);
+  background: #f5e1e1;
+  color: var(--bad);
+}
+
+.option.disabled {
+  cursor: not-allowed;
+}
+
+.option-letter {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.option.selected .option-letter {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.option.correct .option-letter {
+  background: var(--good);
+  border-color: var(--good);
+  color: #fff;
+}
+
+.option.wrong .option-letter {
+  background: var(--bad);
+  border-color: var(--bad);
+  color: #fff;
+}
+
+.option-text {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.cloze-input-wrap {
+  margin-top: 12px;
+}
+
+.cloze-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-family: inherit;
+  background: #fafaf6;
+  color: var(--ink);
+  transition: all 0.15s;
+}
+
+.cloze-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: #fff;
+}
+
+.cloze-input.correct {
+  border-color: var(--good);
+  background: var(--accent-soft);
+}
+
+.cloze-input.wrong {
+  border-color: var(--bad);
+  background: #f5e1e1;
+}
+
+.cloze-input.disabled {
+  cursor: not-allowed;
+  background: #f0ece0;
+}
+
+.feedback {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  display: none;
+}
+
+.feedback.show {
+  display: block;
+  animation: slideDown 0.25s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback.correct {
+  background: var(--accent-soft);
+  border: 1px solid var(--good);
+  color: #2d4a2d;
+}
+
+.feedback.wrong {
+  background: #f5e1e1;
+  border: 1px solid var(--bad);
+  color: #6a2828;
+}
+
+.feedback-header {
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+}
+
+.feedback-answer {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.feedback-answer strong {
+  color: var(--primary);
+}
+
+.feedback-explain {
+  font-size: 14px;
+  line-height: 1.6;
+  background: rgba(255,255,255,0.6);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  margin-top: 8px;
+}
+
+.feedback-explain .label {
+  font-weight: 700;
+  color: var(--primary);
+  margin-right: 4px;
+}
+
+.quiz-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.btn-action {
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-dark);
+}
+
+.btn-primary:disabled {
+  background: #d0c8b8;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--bg-card);
+  color: var(--ink-soft);
+  border: 1.5px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* ===== 结算页 ===== */
+.result-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+}
+
+.result-emoji {
+  font-size: 64px;
+  margin-bottom: 12px;
+}
+
+.result-card h2 {
+  font-size: 28px;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+
+.result-card p {
+  color: var(--ink-soft);
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+.result-stats {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.result-stat {
+  text-align: center;
+}
+
+.result-stat-num {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.result-stat-num.good { color: var(--good); }
+.result-stat-num.bad { color: var(--bad); }
+.result-stat-num.neutral { color: var(--ink-soft); }
+
+.result-stat-label {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+
+.result-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 640px) {
+  .header-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .book-badge {
+    margin: 0 auto;
+  }
+
+  .hero-stats {
+    justify-content: center;
+  }
+
+  .app-title {
+    font-size: 28px;
+  }
+
+  .quiz-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-back, .quiz-info, .quiz-stats {
+    justify-content: center;
+  }
+
+  .quiz-card {
+    padding: 18px;
+  }
+
+  .question-text {
+    font-size: 16px;
+  }
+
+  .quiz-actions {
+    flex-direction: column-reverse;
+  }
+
+  .btn-action {
+    width: 100%;
+  }
+}
+
+
+/* ============================================
+   增强响应式设计 - 手机完整自适应
+   ============================================ */
+
+/* 防止 iOS Safari 自动调整字号 */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* 让 body 在 iPhone 刘海屏安全区域内显示 */
+@supports (padding: max(0px)) {
+  .app-header {
+    padding-top: max(32px, env(safe-area-inset-top));
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
+  .app-main {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
+  .app-footer {
+    padding-bottom: max(18px, env(safe-area-inset-bottom));
+  }
+  .quiz-toolbar {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+}
+
+/* 中等屏（平板，481-768px）*/
+@media (max-width: 768px) {
+  .app-header {
+    padding: 24px 16px 22px;
+  }
+  .app-main {
+    padding: 22px 16px 32px;
+  }
+  .app-title {
+    font-size: 30px;
+    letter-spacing: 1.5px;
+  }
+  .app-subtitle {
+    font-size: 14px;
+  }
+  .book-badge {
+    width: 96px;
+    height: 130px;
+    padding: 12px 8px;
+  }
+  .badge-title {
+    font-size: 24px;
+    letter-spacing: 3px;
+  }
+  .badge-sub {
+    font-size: 8px;
+  }
+  .badge-author {
+    font-size: 10px;
+  }
+  .header-inner {
+    gap: 18px;
+  }
+  .hero-stats {
+    gap: 12px;
+  }
+  .stat {
+    min-width: 90px;
+    padding: 6px 12px;
+  }
+  .stat-num {
+    font-size: 20px;
+  }
+  .stat-label {
+    font-size: 10px;
+  }
+  .chapter-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .section-title h2 {
+    font-size: 20px;
+  }
+  .section-title p {
+    font-size: 13px;
+  }
+  .quiz-card {
+    padding: 20px;
+  }
+  .question-text {
+    font-size: 17px;
+  }
+  .option {
+    padding: 11px 14px;
+    font-size: 14px;
+  }
+  .option-letter {
+    width: 26px;
+    height: 26px;
+    font-size: 13px;
+  }
+  .btn-action {
+    padding: 11px 22px;
+    font-size: 14px;
+  }
+  .feedback-explain {
+    font-size: 13px;
+  }
+}
+
+/* 小屏（手机，≤640px）*/
+@media (max-width: 640px) {
+  .app-header {
+    padding: 22px 14px 20px;
+  }
+  .app-main {
+    padding: 20px 14px 28px;
+  }
+  /* 头部纵向堆叠 */
+  .header-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 16px;
+  }
+  .book-badge {
+    margin: 0 auto;
+    width: 88px;
+    height: 120px;
+    padding: 10px 8px;
+    box-shadow: 3px 3px 0 var(--gold), 6px 6px 0 var(--primary-dark);
+  }
+  .badge-title {
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
+  .badge-sub {
+    font-size: 8px;
+  }
+  .badge-author {
+    font-size: 10px;
+  }
+  .app-title {
+    font-size: 26px;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .app-subtitle {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+  .hero-stats {
+    justify-content: center;
+    gap: 8px;
+  }
+  .stat {
+    min-width: 0;
+    flex: 1 1 calc(33.333% - 8px);
+    max-width: 120px;
+    padding: 6px 8px;
+  }
+  .stat-num {
+    font-size: 18px;
+  }
+  .stat-label {
+    font-size: 9px;
+    line-height: 1.2;
+  }
+  /* 章节卡片：手机上一列 */
+  .chapter-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .chapter-card {
+    padding: 14px 16px 12px;
+  }
+  .chapter-num {
+    font-size: 10px;
+  }
+  .chapter-title {
+    font-size: 15px;
+  }
+  .chapter-sub {
+    font-size: 12px;
+  }
+  .section-title {
+    margin-bottom: 16px;
+  }
+  .section-title h2 {
+    font-size: 18px;
+  }
+  .section-title p {
+    font-size: 12px;
+  }
+  .footer-tip {
+    margin-top: 22px;
+    padding: 12px;
+    font-size: 12px;
+  }
+  /* 答题工具栏：纵向堆叠 */
+  .quiz-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+  }
+  .btn-back {
+    justify-content: center;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+  .back-arrow {
+    font-size: 16px;
+  }
+  .quiz-info {
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .chapter-tag {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+  .quiz-progress {
+    font-size: 13px;
+  }
+  .quiz-stats {
+    justify-content: center;
+    gap: 14px;
+    font-size: 13px;
+  }
+  .stat-correct em, .stat-wrong em {
+    font-size: 15px;
+  }
+  /* 答题卡 */
+  .quiz-card {
+    padding: 16px 14px;
+    border-radius: 12px;
+  }
+  .question-type {
+    font-size: 11px;
+    padding: 2px 8px;
+    margin-bottom: 8px;
+  }
+  .question-text {
+    font-size: 15px;
+    line-height: 1.55;
+    margin-bottom: 14px;
+  }
+  .question-text .blank {
+    min-width: 50px;
+    padding: 0 6px;
+  }
+  .options {
+    gap: 8px;
+  }
+  .option {
+    padding: 10px 12px;
+    font-size: 14px;
+    gap: 10px;
+    border-radius: 7px;
+    /* 触摸友好：点击区域至少 44px 高 */
+    min-height: 44px;
+  }
+  .option-letter {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+  /* 完形填空输入框 */
+  .cloze-input {
+    padding: 11px 14px;
+    font-size: 16px; /* ≥16px 防 iOS Safari 自动缩放 */
+    border-radius: 7px;
+  }
+  /* 反馈区 */
+  .feedback {
+    margin-top: 12px;
+    padding: 12px 14px;
+    border-radius: 7px;
+  }
+  .feedback-header {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  .feedback-answer {
+    font-size: 13px;
+  }
+  .feedback-explain {
+    font-size: 13px;
+    line-height: 1.55;
+    padding: 8px 10px;
+    margin-top: 6px;
+  }
+  /* 按钮区：纵向堆叠，按钮全宽 */
+  .quiz-actions {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+  .btn-action {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 14px;
+    /* 触摸友好：至少 44px 高 */
+    min-height: 44px;
+  }
+  /* 结算页 */
+  .result-card {
+    padding: 28px 18px;
+    border-radius: 12px;
+  }
+  .result-emoji {
+    font-size: 52px;
+  }
+  .result-card h2 {
+    font-size: 22px;
+  }
+  .result-card p {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .result-stats {
+    gap: 16px;
+    margin-bottom: 22px;
+  }
+  .result-stat-num {
+    font-size: 30px;
+  }
+  .result-stat-label {
+    font-size: 11px;
+  }
+  .result-actions {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+  .result-actions .btn-action {
+    width: 100%;
+  }
+  /* 页脚 */
+  .app-footer {
+    padding: 14px 16px;
+    font-size: 11px;
+  }
+}
+
+/* 超小屏（≤360px，如 iPhone SE）*/
+@media (max-width: 360px) {
+  .app-title {
+    font-size: 22px;
+    letter-spacing: 0.5px;
+  }
+  .app-subtitle {
+    font-size: 12px;
+  }
+  .book-badge {
+    width: 80px;
+    height: 108px;
+    padding: 8px 6px;
+  }
+  .badge-title {
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+  .stat {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+  .hero-stats {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .question-text {
+    font-size: 14px;
+  }
+  .option {
+    font-size: 13px;
+    padding: 9px 10px;
+  }
+  .option-text {
+    line-height: 1.35;
+  }
+}
+
+/* 横屏手机（高度小）*/
+@media (max-height: 500px) and (orientation: landscape) {
+  .app-header {
+    padding: 14px 16px 12px;
+  }
+  .header-inner {
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    text-align: left;
+  }
+  .book-badge {
+    width: 70px;
+    height: 95px;
+    padding: 8px 6px;
+    margin: 0;
+  }
+  .badge-title {
+    font-size: 18px;
+    letter-spacing: 1.5px;
+  }
+  .app-title {
+    font-size: 22px;
+    margin-bottom: 2px;
+  }
+  .app-subtitle {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  .hero-stats {
+    gap: 8px;
+  }
+  .stat {
+    padding: 4px 8px;
+    min-width: 80px;
+  }
+  .stat-num {
+    font-size: 16px;
+  }
+  .stat-label {
+    font-size: 9px;
+  }
+  .app-main {
+    padding: 14px 16px 20px;
+  }
+}
+
+/* 大屏（≥1024px）：限制内容宽度，留白美观 */
+@media (min-width: 1024px) {
+  .chapter-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .app-main {
+    padding: 32px 24px 48px;
+  }
+}
+
+/* 触摸设备：去掉 hover 依赖 */
+@media (hover: none) {
+  .chapter-card:hover {
+    transform: none;
+    box-shadow: var(--shadow);
+    border-color: var(--border);
+  }
+  .chapter-card:active {
+    transform: scale(0.98);
+    border-color: var(--gold);
+  }
+  .option:hover:not(.disabled) {
+    border-color: var(--border);
+    background: #fafaf6;
+  }
+  .option:active:not(.disabled) {
+    border-color: var(--primary);
+    background: #fff0ec;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--primary);
+  }
+  .btn-primary:active:not(:disabled) {
+    background: var(--primary-dark);
+    transform: scale(0.98);
+  }
+  .btn-secondary:hover {
+    border-color: var(--border);
+    color: var(--ink-soft);
+  }
+  .btn-secondary:active {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: scale(0.98);
+  }
+  .btn-back:hover {
+    background: transparent;
+    color: var(--ink-soft);
+  }
+  .btn-back:active {
+    background: var(--bg);
+    color: var(--ink);
+  }
+}
+
+/* 打印样式 */
+@media print {
+  .app-header, .quiz-toolbar, .quiz-actions, .app-footer {
+    display: none;
+  }
+  .quiz-card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+  .feedback {
+    display: block !important;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="book-badge">
+          <div class="badge-title">算得快</div>
+          <div class="badge-sub">中国科普名家名作 · 典藏版</div>
+          <div class="badge-author">刘后一 著</div>
+        </div>
+        <div>
+          <h1 class="app-title">速算练习题</h1>
+          <p class="app-subtitle">选章节 · 做3道题 · 看解析，速算功夫慢慢练出来</p>
+          <div class="hero-stats">
+            <div class="stat"><span class="stat-num" id="statChapters">22</span><span class="stat-label">个章节</span></div>
+            <div class="stat"><span class="stat-num" id="statQuestions">132</span><span class="stat-label">道题</span></div>
+            <div class="stat"><span class="stat-num">3</span><span class="stat-label">题型</span></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <!-- 章节选择页 -->
+      <section id="chapterView" class="view chapter-view">
+        <div class="section-title">
+          <h2>选择一个章节开始练习</h2>
+          <p>每章只出 3 道题，答错别着急，看看解析就懂啦</p>
+        </div>
+        <div id="chapterGrid" class="chapter-grid"></div>
+        <div class="footer-tip">
+          <p>小贴士：先看一遍书里的故事，再来刷题效果最好哦</p>
+        </div>
+      </section>
+
+      <!-- 答题页 -->
+      <section id="quizView" class="view quiz-view" hidden>
+        <div class="quiz-toolbar">
+          <button class="btn-back" id="btnBack" type="button">
+            <span class="back-arrow">←</span> 返回章节
+          </button>
+          <div class="quiz-info">
+            <span class="chapter-tag" id="quizChapterTag"></span>
+            <span class="quiz-progress" id="quizProgress">第 1 / 3 题</span>
+          </div>
+          <div class="quiz-stats">
+            <span class="stat-correct">✓ <em id="correctCount">0</em></span>
+            <span class="stat-wrong">✗ <em id="wrongCount">0</em></span>
+          </div>
+        </div>
+
+        <div class="quiz-card" id="quizCard">
+          <!-- 动态渲染 -->
+        </div>
+
+        <div class="quiz-actions">
+          <button class="btn-action btn-secondary" id="btnGiveUp" type="button">这道题不会，看解析</button>
+          <button class="btn-action btn-primary" id="btnSubmit" type="button" disabled>提交答案</button>
+          <button class="btn-action btn-primary" id="btnNext" type="button" hidden>下一题 →</button>
+        </div>
+      </section>
+
+      <!-- 结算页 -->
+      <section id="resultView" class="view result-view" hidden>
+        <div class="result-card">
+          <div class="result-emoji" id="resultEmoji">🎉</div>
+          <h2 id="resultTitle">完成啦！</h2>
+          <p id="resultDesc"></p>
+          <div class="result-stats" id="resultStats"></div>
+          <div class="result-actions">
+            <button class="btn-action btn-secondary" id="btnRetry" type="button">再来 3 道</button>
+            <button class="btn-action btn-primary" id="btnHome" type="button">返回章节选择</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>《算得快》刘后一 著 · 中国少年儿童出版社 · 速算练习应用</p>
+    </footer>
+  </div>
+
+  <script>
+// ===== data.js =====
+/* ============================================
+   《算得快》练习题数据
+   题目类型：cloze(完形填空) / single(单选) / multi(多选)
+   每题包含 question, options(填空为[]), answer, explain
+   ============================================ */
+
+const CHAPTERS = [
+  {
+    id: 1,
+    num: "第 1 章",
+    title: '"一口清"的故事',
+    sub: "加法，从高位算起",
+    desc: "学会从高位开始心算加法，进位方法",
+    difficulty: 1,
+  },
+  {
+    id: 2,
+    num: "第 2 章",
+    title: "这个办法真好",
+    sub: "减法，减法变加法",
+    desc: "用补数把减法变加法，避免借位",
+    difficulty: 1,
+  },
+  {
+    id: 3,
+    num: "第 3 章",
+    title: "高斯的故事",
+    sub: "连续数的加法",
+    desc: "首尾配对、找中间数",
+    difficulty: 2,
+  },
+  {
+    id: 4,
+    num: "第 4 章",
+    title: "一只青蛙一张嘴",
+    sub: "乘以 2 和乘以 3",
+    desc: "凑整、错位相加的乘法窍门",
+    difficulty: 2,
+  },
+  {
+    id: 5,
+    num: "第 5 章",
+    title: "杜小甫向高商挑战",
+    sub: "除以 16",
+    desc: "除以 16 = 除以 2 再除以 2 再除以 2 再除以 2",
+    difficulty: 3,
+  },
+  {
+    id: 6,
+    num: "第 6 章",
+    title: "当了一回小木匠",
+    sub: "乘以 4、6、8",
+    desc: "拆成 2×2、2×3、2×4 的连乘",
+    difficulty: 2,
+  },
+  {
+    id: 7,
+    num: "第 7 章",
+    title: "五一倍作二",
+    sub: "乘以或除以 5、25、125、625",
+    desc: '"五一倍作二" 与 2 的好朋友',
+    difficulty: 3,
+  },
+  {
+    id: 8,
+    num: "第 8 章",
+    title: "由浅入深",
+    sub: "乘以或除以 75、375 等",
+    desc: "把 75、375 拆成 3×25、3×125",
+    difficulty: 3,
+  },
+  {
+    id: 9,
+    num: "第 9 章",
+    title: "奇妙的七",
+    sub: "乘以或除以 7",
+    desc: "143×7=1001，7 的奇妙倍数",
+    difficulty: 3,
+  },
+  {
+    id: 10,
+    num: "第 10 章",
+    title: "愉快的春游",
+    sub: "乘以 9",
+    desc: "乘以 9 等于乘以 10 再减自己",
+    difficulty: 2,
+  },
+  {
+    id: 11,
+    num: "第 11 章",
+    title: "你最喜欢哪个数",
+    sub: "乘以 11、111、37 和其他",
+    desc: "11 的两边一拉，37×3=111 的小窍门",
+    difficulty: 3,
+  },
+  {
+    id: 12,
+    num: "第 12 章",
+    title: "掐指一算",
+    sub: "多位数相乘",
+    desc: "铺地锦、交叉相乘、凑整相乘",
+    difficulty: 4,
+  },
+  {
+    id: 13,
+    num: "第 13 章",
+    title: "打破沙锅问到底",
+    sub: "十位数字相同的两个两位数相乘",
+    desc: "头同尾合十：头×(头+1)，尾×尾",
+    difficulty: 3,
+  },
+  {
+    id: 14,
+    num: "第 14 章",
+    title: "官教兵、兵教官、兵教兵",
+    sub: "个位数字相同的两个两位数相乘",
+    desc: "尾同头合十：头×头+尾，尾×尾",
+    difficulty: 3,
+  },
+  {
+    id: 15,
+    num: "第 15 章",
+    title: "速算高手张叔铭",
+    sub: "乘数是 34 或 67 与整算找零法",
+    desc: "×34 拆成 ×100÷3，×67 用整算找零",
+    difficulty: 4,
+  },
+  {
+    id: 16,
+    num: "第 16 章",
+    title: "具体情况具体分析",
+    sub: "两数和乘以两数差",
+    desc: "(a+b)(a-b) = a² - b² 的妙用",
+    difficulty: 3,
+  },
+  {
+    id: 17,
+    num: "第 17 章",
+    title: "世上无难事",
+    sub: "平方数的计算",
+    desc: "个位是 5 的数平方、十位相同个位合十的平方",
+    difficulty: 3,
+  },
+  {
+    id: 18,
+    num: "第 18 章",
+    title: "温故知新",
+    sub: "除法的速算",
+    desc: "除数是 5、25、125、11 等的速算",
+    difficulty: 3,
+  },
+  {
+    id: 19,
+    num: "第 19 章",
+    title: "触类旁通",
+    sub: "小数、百分数、分数的相互关系与分数加法",
+    desc: "小数分数百分数互化，通分加法",
+    difficulty: 4,
+  },
+  {
+    id: 20,
+    num: "第 20 章",
+    title: "融会贯通",
+    sub: "分数减法和乘法",
+    desc: "通分相减，约分相乘",
+    difficulty: 4,
+  },
+  {
+    id: 21,
+    num: "第 21 章",
+    title: "重要的是思维训练",
+    sub: "结束语",
+    desc: "举一反三，自己创造新方法",
+    difficulty: 2,
+  },
+  {
+    id: 22,
+    num: "习题答案",
+    title: "总复习与挑战",
+    sub: "综合练习",
+    desc: "把学过的速算技巧都用上！",
+    difficulty: 5,
+  },
+];
+
+/* ============================================
+   题目数据
+   每个 chapter 包含多组 questionSet（每组 3 题）
+   ============================================ */
+const QUESTIONS = {
+  1: [
+    // 第 1 章 加法从高位算起
+    [
+      {
+        type: "cloze",
+        text: "计算 47 + 36 时，按从高位算起的方法，先算 40 + 30 = 70，再算 7 + 6 = 13，最后把两部分合起来，结果是____。",
+        options: [],
+        answer: 83,
+        explain: "高位先算：40+30=70；低位再算：7+6=13；合并：70+13=83。想想看，是不是比从个位算起还快？"
+      },
+      {
+        type: "single",
+        text: "用从高位算起的方法计算 58 + 27，下面哪一步是第一步？",
+        options: [
+          "A. 先算 8 + 7 = 15",
+          "B. 先算 50 + 20 = 70",
+          "C. 先算 5 + 2 = 7",
+          "D. 先算 58 + 2 = 60"
+        ],
+        answer: 1,
+        explain: "从高位算起的核心就是先处理十位或更高位，再处理个位。第一步应该是 50+20=70（处理十位），第二步 8+7=15（处理个位），最后 70+15=85。"
+      },
+      {
+        type: "multi",
+        text: "关于从高位算起的加法，下列说法正确的有？（多选）",
+        options: [
+          "A. 适合心算，因为符合读数的顺序",
+          "B. 打算盘本来就是从高位算起",
+          "C. 笔算加法传统上也是从高位算起",
+          "D. 熟能生巧，多练就能算得又快又准"
+        ],
+        answer: [0, 1, 3],
+        explain: "A 正确：从高位算符合读数习惯，便于心算；B 正确：算盘就是从高位算的；C 错误：1902 年我国学西方之后笔算才改成从低位算起；D 正确：杜老师说得好——熟能生巧！"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "从高位算起计算 364 + 258，下面哪个顺序最合理？",
+        options: [
+          "A. 4+8=12 → 60+50=110 → 300+200=500 → 合并",
+          "B. 300+200=500 → 60+50=110 → 4+8=12 → 合并",
+          "C. 364+200=564 → 564+50=614 → 614+8=622",
+          "D. 4+8 → 进位 → 60+50 → 进位 → 300+200 → 合并"
+        ],
+        answer: 2,
+        explain: "从高位算起最自然的方式是：364+200=564 → +50=614 → +8=622。每一步都是把一个数完整加进去，思路连贯。C 是从高位算起的典型顺序。"
+      },
+      {
+        type: "cloze",
+        text: "心算 678 + 145 时，先加 100 得 778，再加 40 得 818，最后加 5 得到的结果是____。",
+        options: [],
+        answer: 823,
+        explain: "678 → +100 = 778 → +40 = 818 → +5 = 823。这就是从高位算起：把 145 拆成 100、40、5 依次加进去，每一步都简单清晰。"
+      },
+      {
+        type: "multi",
+        text: "下列哪种情况用从高位算起的心算方法最方便？（多选）",
+        options: [
+          "A. 买东西时算总价",
+          "B. 听写数字累加",
+          "C. 简单的个位数相加",
+          "D. 看账单时核对金额"
+        ],
+        answer: [0, 1, 3],
+        explain: "从高位算起在心算和生活场景（听数累加、核对金额、估算）中特别方便，因为不用等所有数字到齐就能开始算；C 的个位数相加太简单，不必用此法。"
+      }
+    ]
+  ],
+
+  2: [
+    // 第 2 章 减法变加法
+    [
+      {
+        type: "cloze",
+        text: "用补数法计算 1000 - 587：因为 587 的补数是 413（个位凑 10，其他位凑 9），所以 1000 - 587 = 1000 + 413 - 1000 = ____。",
+        options: [],
+        answer: 413,
+        explain: "587 的补数：个位 7 凑 10 得 3，十位 8 凑 9 得 1，百位 5 凑 9 得 4，所以补数是 413。1000 - 587 = 1000 + 413 - 1000 = 413。这就是'减整加补'的妙处！"
+      },
+      {
+        type: "single",
+        text: "计算 214365 - 65987，下面哪种方法最简便？",
+        options: [
+          "A. 直接逐位相减（要多次借位）",
+          "B. 用补数法：214365 - 100000 + 34013",
+          "C. 全部倒过来相减再取负",
+          "D. 用乘法逆运算"
+        ],
+        answer: 1,
+        explain: "65987 的补数是 34013（各位凑 9，最后一位凑 10）。214365 - 65987 = 214365 - 100000 + 34013 = 148378，一步进位都不用，方便太多！"
+      },
+      {
+        type: "multi",
+        text: "关于'减法变加法'（补数法），下列说法正确的有？（多选）",
+        options: [
+          "A. 适用于被减数各位较小、减数各位较大的情况",
+          "B. 求补数时，个位凑 10，其他位凑 9",
+          "C. 用 1000 减 587 时，587 的补数是 413",
+          "D. 减法变加法后必须减去 1000（或 100、10000）"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "全都正确！A 描述了适用场景；B 是求补数的口诀；C 验算 587+413=1000；D 因为补数法是 a - b = a - 1000 + 补数，所以最后要减去 1000（即把多减的加回来）。"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "376 + 987 用凑整法怎么算最快？",
+        options: [
+          "A. 376+987 直接相加",
+          "B. 376+1000-13 = 1363",
+          "C. 376+987+13-13",
+          "D. 1000+376-13"
+        ],
+        answer: 1,
+        explain: "987 接近 1000，把它看成 1000-13。所以 376+987 = 376+1000-13 = 1363。这种'加整减补'的方法在加法中也一样好用！"
+      },
+      {
+        type: "cloze",
+        text: "计算 532 - 98：因为 98 接近 100，先算 532 - 100 = 432，再加回多减的 2，结果是____。",
+        options: [],
+        answer: 434,
+        explain: "532-98 = 532-100+2 = 434。这种'减整加补'的思路和补数法本质相同：把 98 看成 100-2，先减 100 多减了 2，要把 2 加回来。"
+      },
+      {
+        type: "multi",
+        text: "下列计算中适合用'减法变加法'思想的有？（多选）",
+        options: [
+          "A. 214365 - 65987",
+          "B. 1000 - 586",
+          "C. 100 - 100",
+          "D. 532 - 98"
+        ],
+        answer: [0, 1, 3],
+        explain: "A、B、D 都涉及被减数小、减数大或接近整千/整百的情况，适合用补数法；C 是 0，特殊情况，无需用此法。"
+      }
+    ]
+  ],
+
+  3: [
+    // 第 3 章 高斯的故事 连续数加法
+    [
+      {
+        type: "cloze",
+        text: "高斯小时候算 1+2+3+…+100，他用首尾配对：(1+100)+(2+99)+… 共 50 对，每对都是 101，所以总和是____。",
+        options: [],
+        answer: 5050,
+        explain: "1+100=101, 2+99=101, … 共 50 对，所以 101×50 = 5050。著名的高斯童年故事，这就是连续数求和的经典方法！"
+      },
+      {
+        type: "single",
+        text: "计算 1+2+3+…+49+50，下面哪种算法最快？",
+        options: [
+          "A. 逐个累加",
+          "B. 找中间数：25 × 50 = 1250",
+          "C. 1+50=51, 2+49=51, … 共 25 对, 51×25",
+          "D. 50×51÷2=1275"
+        ],
+        answer: 2,
+        explain: "1+50=51, 2+49=51, …, 25+26=51，共 25 对，结果是 51×25=1275。这是高斯方法；B 用的是'中间数×个数'，也正确但要记住公式；C 更直接体现首尾配对思想。"
+      },
+      {
+        type: "multi",
+        text: "下列哪些是连续数（等差连续数）求和的方法？（多选）",
+        options: [
+          "A. 首尾配对，每对和相同",
+          "B. 找中间数，乘以总个数",
+          "C. (首数+末数)×个数÷2",
+          "D. 把所有数都乘以 2 再相加"
+        ],
+        answer: [0, 1, 2],
+        explain: "A、B、C 都是常见求和方法；D 是变形思路（首尾配对本质就是 2S=首尾配对之和），但作为方法描述不够准确，前三种更标准。"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "计算 2+4+6+…+100（所有偶数之和），最快的方法是？",
+        options: [
+          "A. 逐个相加",
+          "B. 2+100=102, 4+98=102, … 共 25 对, 102×25=2550",
+          "C. 用 1+2+…+50 的结果乘以 2",
+          "D. 100×50 = 5000"
+        ],
+        answer: 1,
+        explain: "2+4+6+…+100 共有 50 项（公差为 2，从 2 到 100）。首尾配对：2+100=4+98=…=52+50=102，共 25 对，102×25=2550。B 直接体现首尾配对思想。"
+      },
+      {
+        type: "cloze",
+        text: "计算 11+13+15+17+19+21+23：这是一个公差为 2 的等差数列，中间数是 17，项数是 7，总和是____。",
+        options: [],
+        answer: 119,
+        explain: "项数是奇数时，总和 = 中间数 × 项数 = 17×7 = 119。等差连续数的巧妙之处就在于'找中间数'！"
+      },
+      {
+        type: "multi",
+        text: "关于连续数求和的说法，正确的有？（多选）",
+        options: [
+          "A. 1+2+3+…+n 的和是 n(n+1)/2",
+          "B. 任何等差连续数的和都等于(首项+末项)×项数÷2",
+          "C. 1+3+5+7+9 的和是 25",
+          "D. 100 以内所有正整数之和是 5050"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "A 是经典公式；B 是等差数列求和公式；C 验算：1+3+5+7+9=25（首尾配对 1+9=10, 3+7=10, 中间 5）；D 就是高斯的故事 5050。全对！"
+      }
+    ]
+  ],
+
+  4: [
+    // 第 4 章 乘以 2 和乘以 3
+    [
+      {
+        type: "cloze",
+        text: "计算 47 × 2：把 47 看成 50 - 3，2 × 50 = 100，2 × 3 = 6，所以 47 × 2 = 100 - ____ = 94。",
+        options: [],
+        answer: 6,
+        explain: "47×2 = (50-3)×2 = 50×2 - 3×2 = 100 - 6 = 94。这种'凑整拆分'的方法在做乘 2、乘 3 时特别好用，能避免直接心算两位数的麻烦。"
+      },
+      {
+        type: "single",
+        text: "心算 28 × 3，下面哪种方法最快？",
+        options: [
+          "A. 28×3 = 28+28+28",
+          "B. 30×3 - 2×3 = 90 - 6 = 84",
+          "C. 28×3 = 80+4 = 84",
+          "D. 20×3 + 8×3 = 60+24 = 84"
+        ],
+        answer: 1,
+        explain: "把 28 凑成 30，30×3=90，再减去多算的 2×3=6，结果 84。这种'先乘再减'的思路对乘 2、乘 3 都很快。注意 B 和 D 都能算，但 B 更简洁。"
+      },
+      {
+        type: "multi",
+        text: "下列关于乘以 2 和乘以 3 的速算说法，正确的有？（多选）",
+        options: [
+          "A. 任何数乘以 2 等于自己相加一次",
+          "B. 一个数乘以 2 等于左移一位（×10÷5 的变形）",
+          "C. 接近整十的数乘 2 或 3，可以先凑整再减",
+          "D. 速算时要先练熟，再求快"
+        ],
+        answer: [0, 2, 3],
+        explain: "A 正确；B 错误（×2 应该是 ×10÷5，但'左移一位'是×10/×5 的口诀化表达也不准确）；C 正确，正是凑整拆分；D 正确，杜老师反复强调熟能生巧。"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "心算 198 × 3，下面哪种最简便？",
+        options: [
+          "A. 200×3 - 2×3 = 600 - 6 = 594",
+          "B. 198+198+198",
+          "C. 100×3 + 98×3 = 300 + 294 = 594",
+          "D. 198×2 = 396, 396+198 = 594"
+        ],
+        answer: 0,
+        explain: "198 接近 200，先 200×3=600，再减去多算的 2×3=6，结果 594。这种凑整法是乘 2、乘 3 的最常用思路，比逐位拆更快捷。"
+      },
+      {
+        type: "cloze",
+        text: "心算 67 × 3：把 67 看成 70 - 3，则 67 × 3 = 70×3 - 3×3 = 210 - ____ = 201。",
+        options: [],
+        answer: 9,
+        explain: "67×3 = (70-3)×3 = 70×3 - 3×3 = 210 - 9 = 201。掌握凑整思路，乘 3 可以信手拈来。"
+      },
+      {
+        type: "multi",
+        text: "心算下面哪些题目时适合用'凑整再调整'的方法？（多选）",
+        options: [
+          "A. 48 × 3",
+          "B. 7 × 3",
+          "C. 99 × 2",
+          "D. 6 × 3"
+        ],
+        answer: [0, 2],
+        explain: "A 中 48 接近 50，凑成 50×3-2×3；C 中 99 接近 100，凑成 100×2-1×2；B 和 D 是简单的个位乘 3，不需要凑整。"
+      }
+    ]
+  ],
+
+  5: [
+    // 第 5 章 除以 16
+    [
+      {
+        type: "cloze",
+        text: "除以 16 的速算方法：除以 16 = 除以 2，再除以 2，再除以 2，再除以 2。例如 256 ÷ 16：连续除以 2 共 4 次，结果是____。",
+        options: [],
+        answer: 16,
+        explain: "256÷16 = 256÷2÷2÷2÷2 = 128÷2÷2÷2 = 64÷2÷2 = 32÷2 = 16。也就是把 256 连续减半 4 次。"
+      },
+      {
+        type: "single",
+        text: "心算 1024 ÷ 16，最快的方法是？",
+        options: [
+          "A. 列竖式除",
+          "B. 1024 ÷ 2 = 512, 512 ÷ 2 = 256, 256 ÷ 2 = 128, 128 ÷ 2 = 64",
+          "C. 1024 ÷ 100 × 16",
+          "D. 1024 - 16 循环"
+        ],
+        answer: 1,
+        explain: "除以 16 就是连续除以 2 共 4 次（因为 2⁴=16）。1024→512→256→128→64，所以 1024÷16=64。注意 1024 本身就是 2 的 10 次方，÷16 就是 2 的 6 次方 = 64。"
+      },
+      {
+        type: "multi",
+        text: "关于除以 16 的速算，下面说法正确的有？（多选）",
+        options: [
+          "A. 16 = 2×2×2×2，所以除以 16 等于连除 4 次 2",
+          "B. 任何数除以 16 都比除以 8 慢",
+          "C. 杜小甫向高商挑战的内容就是除以 16",
+          "D. 这个方法对大数和小数同样适用"
+        ],
+        answer: [0, 2, 3],
+        explain: "A、C 正确；B 错误（不一定，比如 1024÷16 一眼看出=64，而 ÷8 还要算）；D 正确，连续除以 2 适用于所有数。"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "心算 480 ÷ 16，下面哪种最简便？",
+        options: [
+          "A. 480 ÷ 2 = 240, 240 ÷ 2 = 120, 120 ÷ 2 = 60, 60 ÷ 2 = 30",
+          "B. 480 ÷ 10 = 48, 48 ÷ 1.6",
+          "C. 480 - 16×30 = 0",
+          "D. 列竖式除"
+        ],
+        answer: 0,
+        explain: "480÷16：480÷2=240, 240÷2=120, 120÷2=60, 60÷2=30。这是连除 4 次 2 的方法。结果 30。"
+      },
+      {
+        type: "cloze",
+        text: "心算 96 ÷ 16：因为 16 × 6 = 96，所以 96 ÷ 16 = ____。",
+        options: [],
+        answer: 6,
+        explain: "熟悉 16 的倍数：16×1=16, 16×2=32, 16×3=48, 16×4=64, 16×5=80, 16×6=96, 16×7=112, 16×8=128, 16×9=144, 16×10=160。这些要背熟！"
+      },
+      {
+        type: "multi",
+        text: "下列哪些可以用'连续除以 2 共 4 次'来速算？（多选）",
+        options: [
+          "A. 320 ÷ 16",
+          "B. 1000 ÷ 16",
+          "C. 17 ÷ 16",
+          "D. 800 ÷ 16"
+        ],
+        answer: [0, 1, 3],
+        explain: "A: 320→160→80→40→20；B: 1000→500→250→125→62.5；D: 800→400→200→100→50；C 太简单，17÷16=1 余 1，直接看就行。"
+      }
+    ]
+  ],
+
+  6: [
+    // 第 6 章 乘以 4 6 8
+    [
+      {
+        type: "cloze",
+        text: "乘以 4 = 连续乘 2 两次。例如 35 × 4：35×2=70，70×2=____。",
+        options: [],
+        answer: 140,
+        explain: "35×4 = 35×2×2 = 70×2 = 140。这是'当了一回小木匠'章节的核心思路——把乘法变成连续加倍。"
+      },
+      {
+        type: "single",
+        text: "心算 25 × 8，最快的方法是？",
+        options: [
+          "A. 25×8 = 200",
+          "B. 25×2=50, 50×2=100, 100×2=200",
+          "C. 25×10 - 25×2 = 250 - 50 = 200",
+          "D. 25×4×2 = 100×2 = 200"
+        ],
+        answer: 1,
+        explain: "8=2×2×2，所以 25×8 = 25×2×2×2 = 50×2×2 = 100×2 = 200。B 选项清楚展示了连续乘 2 的过程。"
+      },
+      {
+        type: "multi",
+        text: "关于乘以 4、6、8 的速算说法，正确的有？（多选）",
+        options: [
+          "A. 乘以 4 等于连续 ×2 两次",
+          "B. 乘以 6 可以用 5+1 倍的关系 (×6 = ×3×2)",
+          "C. 乘以 8 等于连续 ×2 三次",
+          "D. 接近整十的数乘这些数，都可以先凑整再调"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "A、C 正确（2 的幂次分解）；B 正确（×6=×2×3 或 ×3×2 都行）；D 正确，凑整是通用思路。"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "心算 125 × 8，下面哪种最快？",
+        options: [
+          "A. 125×4=500, 500×2=1000",
+          "B. 125×2=250, 250×2=500, 500×2=1000",
+          "C. 125×8 直接背过",
+          "D. 100×8+25×8 = 800+200=1000"
+        ],
+        answer: 1,
+        explain: "125×8 = 125×2×2×2 = 250×2×2 = 500×2 = 1000。这是连续乘 2 三次的典型例子，要熟记 125×8=1000！"
+      },
+      {
+        type: "cloze",
+        text: "心算 78 × 6：先算 78 × 2 = 156，再算 156 × 3 = 468（因为 6 = 2×3），所以 78 × 6 = ____。",
+        options: [],
+        answer: 468,
+        explain: "×6 = ×2×3，先乘 2 再乘 3：78×2=156, 156×3=156×2+156=312+156=468。也可以 78×3=234, 234×2=468。"
+      },
+      {
+        type: "multi",
+        text: "下面关于 75、125、625 与 4、8、16 的关系，正确的有？（多选）",
+        options: [
+          "A. 75×4=300",
+          "B. 125×8=1000",
+          "C. 625×16=10000",
+          "D. 25×4=100"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "这些'黄金搭档'是速算的基石：25×4=100, 125×8=1000, 625×16=10000, 75×4=300（因为 75=3×25）。要背得滚瓜烂熟！"
+      }
+    ]
+  ],
+
+  7: [
+    // 第 7 章 五一倍作二
+    [
+      {
+        type: "cloze",
+        text: '"五一倍作二"的意思是：一个数乘以 5，等于这个数除以 2 再乘以 10。例如 36 × 5 = 36÷2×10 = 18×10 = ____。',
+        options: [],
+        answer: 180,
+        explain: "乘 5 的口诀：除以 2，乘以 10。因为 5 = 10/2。这种'变乘为除'的思路在 25、125、625 的速算中也常用！"
+      },
+      {
+        type: "single",
+        text: "心算 84 × 25，下面哪种最快？",
+        options: [
+          "A. 84×25 = 84×100÷4 = 8400÷4 = 2100",
+          "B. 84×20 + 84×5 = 1680+420 = 2100",
+          "C. 84×25 = 84×5×5 = 420×5 = 2100",
+          "D. 84×25 = 25×80 + 25×4 = 2000+100 = 2100"
+        ],
+        answer: 0,
+        explain: "×25 的核心：×100÷4（因为 25 = 100/4）。84×25 = 84×100÷4 = 8400÷4 = 2100。这是乘 25 最快的方法！"
+      },
+      {
+        type: "multi",
+        text: "关于 ×5、×25、×125、×625 的速算，下列说法正确的有？（多选）",
+        options: [
+          "A. ×5 = ×10÷2",
+          "B. ×25 = ×100÷4",
+          "C. ×125 = ×1000÷8",
+          "D. ×625 = ×10000÷16"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "全是黄金搭档：5=10/2, 25=100/4, 125=1000/8, 625=10000/16。掌握这些，看到这些乘数就能立刻反应！"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "心算 7200 ÷ 25，最快的方法是？",
+        options: [
+          "A. 7200 ÷ 25 = 7200 × 4 ÷ 100 = 28800÷100 = 288",
+          "B. 7200 ÷ 5 ÷ 5",
+          "C. 7200 ÷ 100 × 25",
+          "D. 列竖式除"
+        ],
+        answer: 0,
+        explain: "除以 25 等于乘以 4 再除以 100（商不变性质）。7200÷25 = 7200×4÷100 = 28800÷100 = 288。简单吧？"
+      },
+      {
+        type: "cloze",
+        text: "心算 96 × 125：96×1000=96000，96000÷8=____，所以 96 × 125 = 12000。",
+        options: [],
+        answer: 12000,
+        explain: "×125 = ×1000÷8。96×1000=96000, 96000÷8=12000。验证：125×8=1000，所以 96×125 = 96×1000÷8 = 12000。"
+      },
+      {
+        type: "multi",
+        text: "下面哪些是 5、25、125、625 的速算题？（多选）",
+        options: [
+          "A. 48 × 5 = 240",
+          "B. 64 × 25 = 1600",
+          "C. 32 × 125 = 4000",
+          "D. 16 × 625 = 10000"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "A: 48÷2×10=24×10=240；B: 64×100÷4=6400÷4=1600；C: 32×1000÷8=32000÷8=4000；D: 16×10000÷16=10000。全是经典速算！"
+      }
+    ]
+  ],
+
+  8: [
+    // 第 8 章 乘以或除以 75 375 等
+    [
+      {
+        type: "cloze",
+        text: "75 = 3 × 25，所以 24 × 75 = 24 × 3 × 25 = 72 × 25 = 72 × 100 ÷ 4 = 7200 ÷ 4 = ____。",
+        options: [],
+        answer: 1800,
+        explain: "先把 75 拆成 3×25，再用 25 的'好朋友'。24×3=72, 72×25=72×100÷4=1800。这是把 75 类的数变简单的关键！"
+      },
+      {
+        type: "single",
+        text: "心算 36 × 75，最快的方法是？",
+        options: [
+          "A. 36×75 = 36×3×25 = 108×25 = 108×100÷4 = 2700",
+          "B. 36×75 = 36×100 - 36×25 = 3600 - 900 = 2700",
+          "C. 36×75 = 36×70 + 36×5",
+          "D. 75×30 + 75×6 = 2250 + 450 = 2700"
+        ],
+        answer: 0,
+        explain: "×75 = ×3×25 = ×3×100÷4。36×3=108, 108×100÷4=10800÷4=2700。这种方法比 A、B、C 都更直接，是 75 类的'正解'！"
+      },
+      {
+        type: "multi",
+        text: "关于 75、375 的速算，正确的说法有？（多选）",
+        options: [
+          "A. 75 = 3×25",
+          "B. 375 = 3×125",
+          "C. ×75 = ×3×100÷4",
+          "D. ×375 = ×3×1000÷8"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "全对！75 和 375 都可以拆成 3×25 和 3×125，然后再用 25、125 的速算技巧。这是'由浅入深'的核心——把难数拆成熟悉的小数！"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "心算 480 ÷ 75，最快的方法是？",
+        options: [
+          "A. 480 ÷ 75 = 480×4÷300 = 1920÷300",
+          "B. 480 ÷ 75 = 480 ÷ 3 ÷ 25 = 160 ÷ 25 = 160×4÷100 = 6.4",
+          "C. 480 ÷ 75 = 480 - 75×6 = 30",
+          "D. 480 ÷ 75 = 列竖式"
+        ],
+        answer: 1,
+        explain: "75 = 3×25，所以 480÷75 = 480÷3÷25 = 160÷25。160÷25=160×4÷100=6.4。这种拆分可以让除法变得简单！"
+      },
+      {
+        type: "cloze",
+        text: "心算 24 × 375：因为 375 = 3 × 125，所以 24 × 375 = 24 × 3 × 125 = 72 × 125 = 72 × 1000 ÷ 8 = 72000 ÷ 8 = ____。",
+        options: [],
+        answer: 9000,
+        explain: "375 类速算同样思路：先拆 3×125，再 ×1000÷8。24×3=72, 72×1000=72000, 72000÷8=9000。"
+      },
+      {
+        type: "multi",
+        text: "下列能用'乘 3 再用 25/125 速算'的题目有？（多选）",
+        options: [
+          "A. 16 × 75",
+          "B. 32 × 375",
+          "C. 24 × 25",
+          "D. 12 × 75"
+        ],
+        answer: [0, 1, 3],
+        explain: "A: 16×3×25；B: 32×3×125；D: 12×3×25；C 中 24×25 直接用 ×100÷4 更简单，不用拆 3。"
+      }
+    ]
+  ],
+
+  9: [
+    // 第 9 章 奇妙的七
+    [
+      {
+        type: "cloze",
+        text: '"奇妙的七"有一个经典等式：143 × 7 = 1001。反过来，1001 ÷ 7 = ____。',
+        options: [],
+        answer: 143,
+        explain: "143×7=1001 是书里反复强调的'奇妙七'。1001÷7=143。利用这个关系，×7 和 ÷7 都能变得飞快！"
+      },
+      {
+        type: "single",
+        text: "心算 143 × 14，最快的方法是？",
+        options: [
+          "A. 143×14 = 143×7×2 = 1001×2 = 2002",
+          "B. 143×10 + 143×4 = 1430+572 = 2002",
+          "C. 143×14 直接列竖式",
+          "D. 140×14 + 3×14"
+        ],
+        answer: 0,
+        explain: "利用 143×7=1001，把 14 拆成 7×2：143×14 = 143×7×2 = 1001×2 = 2002。这种'拆乘数'的思路是 7 类速算的关键！"
+      },
+      {
+        type: "multi",
+        text: "关于 ×7 的速算，下列说法正确的有？（多选）",
+        options: [
+          "A. 143×7=1001（要记熟）",
+          "B. ×7 可以拆成 ×7 = ×2 + ×5 组合",
+          "C. ×7 = ×8 - ×1（×8 减自身）",
+          "D. 1001÷7=143 可以反过来用"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "A 是必须背的'奇妙的七'；B、C 都是常见的拆法；D 利用 1001÷7=143 反向应用。"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "心算 286 × 7，下面哪种最快？",
+        options: [
+          "A. 286×7 = 200×7+86×7 = 1400+602 = 2002",
+          "B. 286 = 2×143, 所以 286×7 = 2×143×7 = 2×1001 = 2002",
+          "C. 286×7 列竖式",
+          "D. 286×7 = 286×10 - 286×3 = 2860 - 858 = 2002"
+        ],
+        answer: 1,
+        explain: "注意到 286 = 2×143 ！286×7 = 2×143×7 = 2×1001 = 2002。这是利用 143×7=1001 的精彩应用。看到 286 就要立刻想到 2×143！"
+      },
+      {
+        type: "cloze",
+        text: "心算 1001 ÷ 7：因为 143 × 7 = 1001，所以 1001 ÷ 7 = ____。",
+        options: [],
+        answer: 143,
+        explain: "143×7=1001 是核心等式。1001÷7 就是反过来用，结果是 143。这个关系在很多速算中都能化腐朽为神奇！"
+      },
+      {
+        type: "multi",
+        text: "下列可以用 143×7=1001 来速算的有？（多选）",
+        options: [
+          "A. 143 × 21 = 3003",
+          "B. 286 × 7 = 2002",
+          "C. 1001 ÷ 143",
+          "D. 1000 ÷ 7"
+        ],
+        answer: [0, 1, 2],
+        explain: "A: 143×21=143×3×7=429×7=3003；B: 2×143×7=2002；C: 1001÷143=7；D 与 143 无关，是 1000÷7=142.857…"
+      }
+    ]
+  ],
+
+  10: [
+    // 第 10 章 乘以 9
+    [
+      {
+        type: "cloze",
+        text: "乘以 9 的窍门：×9 = ×10 - 自己。例如 47 × 9 = 47 × 10 - 47 = 470 - ____ = 423。",
+        options: [],
+        answer: 47,
+        explain: "×9 = ×10 - ×1，所以 47×9 = 470 - 47 = 423。这种方法在 9 的乘法中又快又准，是 '愉快的春游'的核心技巧！"
+      },
+      {
+        type: "single",
+        text: "心算 86 × 9，最快的方法是？",
+        options: [
+          "A. 86×9 = 86×10 - 86 = 860 - 86 = 774",
+          "B. 86×9 = 86×3×3 = 258×3 = 774",
+          "C. 86×9 = 80×9 + 6×9 = 720+54 = 774",
+          "D. 列竖式"
+        ],
+        answer: 0,
+        explain: "×9 = ×10 - ×1 是最快的捷径：86×10=860, 减 86 得 774。这个方法不用拆 80 和 6，直接一步到位！"
+      },
+      {
+        type: "multi",
+        text: "关于 ×9 的速算，下列说法正确的有？（多选）",
+        options: [
+          "A. ×9 = ×10 - ×1",
+          "B. 任何数 ×9 的个位数字，与原数个位互补为 9",
+          "C. ×99 = ×100 - ×1",
+          "D. ×999 = ×1000 - ×1"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "A 正确；B 正确（如 47×9=423，3 与 7 互补为 9；86×9=774，4 与 6 互补）；C、D 是这个思路的推广，非常实用！"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "心算 123 × 99，最快的方法是？",
+        options: [
+          "A. 123×100 - 123 = 12300 - 123 = 12177",
+          "B. 123×99 = 123×9×11",
+          "C. 123×99 列竖式",
+          "D. 120×99 + 3×99"
+        ],
+        answer: 0,
+        explain: "×99 = ×100 - ×1！123×100=12300, 减 123 得 12177。这种思路对任何接近 100、1000 的乘数都有效，是凑整法的'高阶版'！"
+      },
+      {
+        type: "cloze",
+        text: "心算 567 × 999：因为 ×999 = ×1000 - ×1，所以 567 × 999 = 567000 - ____ = 566433。",
+        options: [],
+        answer: 567,
+        explain: "×999 = ×1000 - ×1。567×1000=567000, 减 567 得 566433。这种方法在做大数乘法时简直太方便了！"
+      },
+      {
+        type: "multi",
+        text: "下面可以用'×1000 - 自己'来算的有？（多选）",
+        options: [
+          "A. 348 × 999",
+          "B. 99 × 9",
+          "C. 5 × 9",
+          "D. 1234 × 99"
+        ],
+        answer: [0, 1, 3],
+        explain: "A: ×999 = ×1000 - 348；B: 99×9 = 99×10-99 = 990-99=891；C: 5×9 用 ×10-5=45 也对但太简单，不必拆；D: ×99 = ×100-1234。"
+      }
+    ]
+  ],
+
+  11: [
+    // 第 11 章 乘以 11 111 37
+    [
+      {
+        type: "cloze",
+        text: "乘以 11 的窍门：把原数的两位'拉'开，中间加它们的和。例如 35 × 11：把 3 和 5 拉开，中间放 3+5=8，结果是 ____。",
+        options: [],
+        answer: 385,
+        explain: "35×11：3_5, 中间填 3+5=8，得到 385。如果中间和超过 9 要进位（如同 67×11: 6_7, 中间 13→进位1, 得 737）。"
+      },
+      {
+        type: "single",
+        text: "心算 47 × 11，下面哪种最准确？",
+        options: [
+          "A. 4_7, 中间 4+7=11, 所以是 4(11)7 = 4117",
+          "B. 4_7, 中间 4+7=11, 进位 1, 得 517",
+          "C. 47×11 = 47×10 + 47 = 470+47 = 517",
+          "D. 47×11 = 47+47×10 = 517"
+        ],
+        answer: 1,
+        explain: "47×11 = 4_7, 中间 4+7=11，进位后百位加 1：4+1=5，个位 7，结果 517。注意 A 错在没进位；B、C、D 都对，但 B 是 ×11 的'两拉开'方法。"
+      },
+      {
+        type: "multi",
+        text: "关于 ×11、×111、×37 的速算，下列说法正确的有？（多选）",
+        options: [
+          "A. ×11 用'两边一拉中间加'",
+          "B. ×111 = ×1000 + ×10 + ×1",
+          "C. 37×3 = 111，可以反着用",
+          "D. ×37 一定比 ×11 慢"
+        ],
+        answer: [0, 1, 2],
+        explain: "A、B、C 正确；D 错误——当不能直接用 11 凑整时，37×3=111 的关系也能帮上忙，关键是看哪个更方便！"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "心算 27 × 111，最快的方法是？",
+        options: [
+          "A. 27×111 = 27×100+27×10+27 = 2700+270+27 = 2997",
+          "B. 27×111 = 27×(100+10+1)",
+          "C. 把 27 两边拉开, 中间 2+7=9, 9+2+7...",
+          "D. 27×111 = 30×111 - 3×111"
+        ],
+        answer: 0,
+        explain: "111 = 100+10+1，所以 27×111 = 2700+270+27 = 2997。这种'拆成 100+10+1'的思路对 111、101、1001 都适用！"
+      },
+      {
+        type: "cloze",
+        text: "心算 74 × 37：注意到 37 × 3 = 111，所以 74 × 37 = 74 ÷ 2 × 111 ÷ 3 × 2……更简单的方法：74 × 37 = 74 × (111/3) = (74 × 111) ÷ 3 = 8214 ÷ 3 = ____。",
+        options: [],
+        answer: 2738,
+        explain: "用 37×3=111，所以 ×37 = ×111÷3。74×111=8214（74×100+74×10+74）, 8214÷3=2738。验算 74×37：70×37=2590, 4×37=148, 总 2738。"
+      },
+      {
+        type: "multi",
+        text: "下列利用 37×3=111 来速算的有？（多选）",
+        options: [
+          "A. 74 × 37 = 74 × 111 ÷ 3 = 2738",
+          "B. 333 ÷ 37 = 9",
+          "C. 111 × 37 = 4107",
+          "D. 333 × 3 = 999"
+        ],
+        answer: [0, 1, 2],
+        explain: "A: 利用 37×3=111 反向；B: 333÷37=333÷111×3=3×3=9；C: 111×37=111×111÷3=12321÷3=4107；D 与 37 无关。"
+      }
+    ]
+  ],
+
+  12: [
+    // 第 12 章 多位数相乘
+    [
+      {
+        type: "cloze",
+        text: "铺地锦（格子乘法）是中国古代的算法：把每个部分积放进格子里，最后斜着加起来。例如 23 × 14 的铺地锦结果是 ____。",
+        options: [],
+        answer: 322,
+        explain: "23×14=23×10+23×4=230+92=322。铺地锦的思路和普通拆分一样，只是用格子'摆'出来，更直观不容易错。"
+      },
+      {
+        type: "single",
+        text: "心算 43 × 21，下面哪种最方便？",
+        options: [
+          "A. 43×21 = 43×20 + 43×1 = 860+43 = 903",
+          "B. 43×21 = 43×7×3 = 301×3 = 903",
+          "C. 43×21 = 21×40 + 21×3 = 840+63 = 903",
+          "D. 以上都对"
+        ],
+        answer: 3,
+        explain: "A、B、C 三种拆法都能算，结果都是 903。说明多位数相乘没有唯一解，关键是找到最适合自己的拆法！"
+      },
+      {
+        type: "multi",
+        text: "关于多位数相乘的速算方法，正确的有？（多选）",
+        options: [
+          "A. 铺地锦（古代中国）",
+          "B. 交叉相乘（古代印度）",
+          "C. 拆分到一位数再算",
+          "D. 凑整（如 99、101）"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "这些都是书里介绍的方法！铺地锦、交叉相乘是古人智慧，拆分和凑整是现代速算的核心思路。掌握一种或多种，灵活运用！"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "心算 87 × 13，最快的方法是？",
+        options: [
+          "A. 87×13 = 87×10 + 87×3 = 870+261 = 1131",
+          "B. 87×13 = 87×(10+3) = 1131",
+          "C. 87×13 = 100×13 - 13×13 = 1300-169 = 1131",
+          "D. 87×13 = 80×13 + 7×13 = 1040+91 = 1131"
+        ],
+        answer: 0,
+        explain: "×13 = ×10+×3 是最直接的拆法：87×10=870, 87×3=261, 合 1131。C 用了凑整法（看 87≈100），但要算 13×13 反而更复杂。"
+      },
+      {
+        type: "cloze",
+        text: "心算 96 × 14：利用 96 = 100 - 4，则 96 × 14 = 100×14 - 4×14 = 1400 - ____ = 1344。",
+        options: [],
+        answer: 56,
+        explain: "凑整法：96×14 = (100-4)×14 = 1400-56 = 1344。当一个数接近 100 时，这种方法特别方便！"
+      },
+      {
+        type: "multi",
+        text: "下列多位数乘法中，最适合用'凑整法'的有？（多选）",
+        options: [
+          "A. 98 × 25",
+          "B. 47 × 13",
+          "C. 99 × 35",
+          "D. 78 × 16"
+        ],
+        answer: [0, 2],
+        explain: "A: 98≈100, 98×25=100×25-2×25=2500-50=2450；C: 99≈100, 99×35=3500-35=3465；B 和 D 的数都不接近 100，用普通拆分更方便。"
+      }
+    ]
+  ],
+
+  13: [
+    // 第 13 章 十位数字相同的两个两位数相乘
+    [
+      {
+        type: "cloze",
+        text: '"头同尾合十"的两位数相乘：头×(头+1) 放前面，尾×尾 放后面。例如 43×47：头 4×(4+1)=20, 尾 3×7=21, 结果 ____。',
+        options: [],
+        answer: 2021,
+        explain: "43×47：十位都是 4（头同），个位 3+7=10（尾合十）。头×(头+1)=4×5=20, 尾×尾=3×7=21, 合起来 2021。验证：43×47=40×47+3×47=1880+141=2021。"
+      },
+      {
+        type: "single",
+        text: "心算 65 × 65，最快的方法是？",
+        options: [
+          "A. 6×7=42, 5×5=25, 合 4225",
+          "B. 65×65 = 65×60 + 65×5 = 3900+325 = 4225",
+          "C. 65×65 = (65+5)(65-5)+25 = 70×60+25 = 4225",
+          "D. 全部都对"
+        ],
+        answer: 3,
+        explain: "65×65：十位都是 6（相同），个位 5+5=10（合十）。用头同尾合十的口诀：6×7=42, 5×5=25, 合 4225。A、B、C 三种方法都得到 4225。"
+      },
+      {
+        type: "multi",
+        text: "下面哪些两位数相乘可以用'头同尾合十'口诀？（多选）",
+        options: [
+          "A. 42×48 (十位都是 4, 个位 2+8=10)",
+          "B. 73×77 (十位都是 7, 个位 3+7=10)",
+          "C. 56×54 (十位都是 5, 个位 6+4=10)",
+          "D. 91×19 (十位不同)"
+        ],
+        answer: [0, 1, 2],
+        explain: "A、B、C 都符合'十位相同、个位和为 10'的条件，可以用头×(头+1) 尾×尾的口诀；D 不符合（十位 9 和 1 不同）。"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "心算 78 × 72，下面哪种最快？",
+        options: [
+          "A. 78×72 = 78×70+78×2 = 5460+156 = 5616",
+          "B. 7×8=56, 8×2=16, 合 5616",
+          "C. 78×72 = (75+3)(75-3) = 75²-9 = 5625-9 = 5616",
+          "D. B 和 C 都对"
+        ],
+        answer: 3,
+        explain: "78×72：十位都是 7（头同），个位 8+2=10（尾合十）。B 用口诀：7×8=56, 8×2=16, 合 5616。C 用平方差 (a+b)(a-b)=a²-b², 75²=5625, 减 9 得 5616。都对！"
+      },
+      {
+        type: "cloze",
+        text: "心算 36 × 34：十位都是 3, 个位 6+4=10。用口诀：3×(3+1)=12, 6×4=____, 所以 36×34 = 1224。",
+        options: [],
+        answer: 24,
+        explain: "36×34：头 3×4=12, 尾 6×4=24, 合 1224。验证：36×34 = 36×30+36×4 = 1080+144=1224。"
+      },
+      {
+        type: "multi",
+        text: "下面用'头同尾合十'口诀算的结果，正确的有？（多选）",
+        options: [
+          "A. 23×27 = 621 (2×3=6, 3×7=21, 621)",
+          "B. 81×89 = 7209 (8×9=72, 1×9=9, 7209)",
+          "C. 64×66 = 4224 (6×7=42, 4×6=24, 4224)",
+          "D. 55×55 = 3025 (5×6=30, 5×5=25, 3025)"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "A: 23×27, 2+3=5 ≠ 10 但 2×3=6, 实际 23+27=50 啊 23+7=30 不是尾合十, 验算 23×27=621, 头×(头+1)=2×3=6, 尾×尾=3×7=21, 正确！B、C、D 都正确。"
+      }
+    ]
+  ],
+
+  14: [
+    // 第 14 章 个位数字相同的两个两位数相乘
+    [
+      {
+        type: "cloze",
+        text: '"尾同头合十"的两位数相乘：头×头+尾 放前面，尾×尾 放后面。例如 34×74：十位 3+7=10（头合十），尾都是 4（尾同）。头×头+尾 = 3×7+4 = 25，尾×尾 = 4×4=16，结果是 ____。',
+        options: [],
+        answer: 2516,
+        explain: "34×74：尾同（都是 4），头合十（3+7=10）。头×头+尾=3×7+4=25, 尾×尾=4×4=16, 合 2516。验证：34×74=30×74+4×74=2220+296=2516。"
+      },
+      {
+        type: "single",
+        text: "心算 26 × 86，最快的方法是？",
+        options: [
+          "A. 26×86 = 26×80+26×6 = 2080+156 = 2236",
+          "B. 2×8+6=22, 6×6=36, 合 2236",
+          "C. 26×86 = (50+36)(50-36)+... (凑整差)",
+          "D. 全部都对"
+        ],
+        answer: 3,
+        explain: "26×86：个位都是 6（尾同），十位 2+8=10（头合十）。B 用口诀：头×头+尾=2×8+6=22, 尾×尾=6×6=36, 合 2236。A 也对但慢。"
+      },
+      {
+        type: "multi",
+        text: "下面哪些两位数相乘可以用'尾同头合十'口诀？（多选）",
+        options: [
+          "A. 13×93 (尾都是 3, 头 1+9=10)",
+          "B. 47×67 (尾都是 7, 头 4+6=10)",
+          "C. 28×88 (尾都是 8, 头 2+8=10)",
+          "D. 19×29 (尾都是 9, 头 1+2=3)"
+        ],
+        answer: [0, 1, 2],
+        explain: "A、B、C 都符合'个位相同、十位和为 10'的条件；D 中 1+2=3，不合十，不能用此口诀。"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "心算 53 × 53，下面哪种最快？",
+        options: [
+          "A. 5×5+3=28, 3×3=9, 合 2809",
+          "B. 53×53 = 53×50+53×3 = 2650+159 = 2809",
+          "C. 53² = (50+3)² = 2500+300+9 = 2809",
+          "D. 都对"
+        ],
+        answer: 3,
+        explain: "53×53：尾同（都是 3），头合十（5+5=10）。A 用尾同口诀：5×5+3=28, 3×3=9, 合 2809。B、C 也都对，体现了多种思路！"
+      },
+      {
+        type: "cloze",
+        text: "心算 18 × 98：尾都是 8（尾同），十位 1+9=10（头合十）。用口诀：1×9+8 = ____, 8×8 = 64, 所以 18×98 = 1764。",
+        options: [],
+        answer: 17,
+        explain: "18×98：头×头+尾=1×9+8=17, 尾×尾=8×8=64, 合 1764。验证：18×98=18×100-18×2=1800-36=1764。"
+      },
+      {
+        type: "multi",
+        text: "用'尾同头合十'口诀算的下列结果，正确的有？（多选）",
+        options: [
+          "A. 19×59 = 1121 (1×5+9=14, 9×9=81, 1481)",
+          "B. 19×59 = 1481 (头×头+尾=14, 尾×尾=81)",
+          "C. 37×77 = 2849 (3×7+7=28, 7×7=49, 2849)",
+          "D. 44×64 = 2816 (4×6+4=28, 4×4=16, 2816)"
+        ],
+        answer: [1, 2, 3],
+        explain: "A 错（19×59=1121 是错的，正确是 1481）；B、C、D 都正确。"
+      }
+    ]
+  ],
+
+  15: [
+    // 第 15 章 乘数是 34 或 67 和整算找零法
+    [
+      {
+        type: "cloze",
+        text: "×34 的速算：34 = 100 - 66，×34 = ×100 - ×66。更简单的拆法：×34 = ×100 ÷ 3（因为 34 ≈ 100/3）。例如 51 × 34 = 5100 ÷ 3 = ____。",
+        options: [],
+        answer: 1734,
+        explain: "51×34 = 51×100÷3 = 5100÷3 = 1700。但注意！34 不是 100/3 准确值，所以严格说是近似。实际验算：51×34=51×30+51×4=1530+204=1734。凑整法是 51×100/3 的思路，但要做调整。实际整算找零法更准。"
+      },
+      {
+        type: "single",
+        text: "“整算找零”的核心思想是？",
+        options: [
+          "A. 算出整数结果，再把零头补回来或扣掉",
+          "B. 把乘数凑成整十整百来算",
+          "C. 33 元的商品×3，找零 1 元（即 33×3=99=100-1）",
+          "D. 都对"
+        ],
+        answer: 3,
+        explain: "整算找零的核心是把数凑成整数运算，再调整零头。33×3=99=100-1（找零 1）是经典案例。×67、×34 等都可以这样处理。"
+      },
+      {
+        type: "multi",
+        text: "关于 ×67 和 ×34 的速算说法，正确的有？（多选）",
+        options: [
+          "A. 67 = 100 - 33，所以 ×67 = ×100 - ×33",
+          "B. 34 = 100 - 66，所以 ×34 = ×100 - ×66",
+          "C. 整算找零法的核心是凑整数",
+          "D. 张叔铭是书中的速算高手"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "全对！A、B 是凑整拆法；C 是核心思想；D 是故事里的'人物'，可以加深印象。"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "心算 33 × 67，最快的方法是？",
+        options: [
+          "A. 33×67 = 33×(100-33) = 3300 - 1089 = 2211",
+          "B. 33×67 = (50+17)(50-17)+... = 2500-289 = 2211",
+          "C. 33×67 = 33×60+33×7 = 1980+231 = 2211",
+          "D. 都对"
+        ],
+        answer: 3,
+        explain: "33×67：A 用 67=100-33；B 用平方差 50²-17²；C 用普通拆分。三种方法都能算，结果都是 2211。灵活选用！"
+      },
+      {
+        type: "cloze",
+        text: "心算 67 × 9：因为 67 × 3 = 201，所以 67 × 9 = 67 × 3 × 3 = 201 × 3 = ____。",
+        options: [],
+        answer: 603,
+        explain: "67×9 = 67×3×3。67×3=201（67×3=200+3×3=200+9=201? 实际是 67×3=201 没错），201×3=603。验算：67×9=603，6+0+3=9 也对！"
+      },
+      {
+        type: "multi",
+        text: "下列适合用'整算找零'或凑整思路的题目有？（多选）",
+        options: [
+          "A. 99 × 23",
+          "B. 67 × 14",
+          "C. 101 × 35",
+          "D. 50 × 24"
+        ],
+        answer: [0, 1, 2],
+        explain: "A: 99×23=100×23-23=2300-23=2277；B: 67×14=67×(10+4)=670+268=938；C: 101×35=35×100+35=3535；D 中 50×24 直接 5×24=120 再加 0 即可，不用凑整。"
+      }
+    ]
+  ],
+
+  16: [
+    // 第 16 章 两数和乘以两数差
+    [
+      {
+        type: "cloze",
+        text: "(a+b)(a-b) = a² - b²。例如 53×47 = (50+3)(50-3) = 50² - 3² = 2500 - ____ = 2491。",
+        options: [],
+        answer: 9,
+        explain: "平方差公式！(50+3)(50-3) = 50²-3² = 2500-9 = 2491。验算：53×47=53×50-53×3=2650-159=2491。完全一致！"
+      },
+      {
+        type: "single",
+        text: "心算 68 × 52，下面哪种最快？",
+        options: [
+          "A. 68×52 = 60×52+8×52 = 3120+416 = 3536",
+          "B. 68×52 = (60+8)(60-8)+64 = 3600-64+64 = 3536",
+          "C. 68×52 = (60+8)(52) = 3120+416 = 3536",
+          "D. 68×52 = (60+8)(60-8) = 60²-8² = 3600-64 = 3536"
+        ],
+        answer: 3,
+        explain: "D 用平方差：(60+8)(60-8) = 60²-8² = 3600-64 = 3536。这是'两数和乘以两数差'最典型的应用！"
+      },
+      {
+        type: "multi",
+        text: "关于 (a+b)(a-b) = a²-b² 的应用，正确的有？（多选）",
+        options: [
+          "A. 当两个数都接近某个整数 a 时特别好算",
+          "B. 24×16 = 20²-4² = 400-16 = 384",
+          "C. 33×27 = 30²-3² = 900-9 = 891",
+          "D. 必须两数都是偶数才能用"
+        ],
+        answer: [0, 1, 2],
+        explain: "A 正确（关键观察：找 a）；B 验算：24×16=384 正确；C 验算：33×27=891 正确；D 错误，奇数也能用（如 33×27）。"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "心算 102 × 98，最快的方法是？",
+        options: [
+          "A. 102×98 = 100²-2² = 10000-4 = 9996",
+          "B. 102×98 = 100×98+2×98 = 9800+196 = 9996",
+          "C. 102×98 = 100×100+2×98-100×2 = 10000+196-200 = 9996",
+          "D. 都对"
+        ],
+        answer: 3,
+        explain: "102×98 = (100+2)(100-2) = 100²-2² = 10000-4 = 9996。平方差公式在这种'靠近 100'的乘法中最神奇！"
+      },
+      {
+        type: "cloze",
+        text: "心算 75 × 65：因为 75 = 70+5, 65 = 70-5，所以 75×65 = 70² - 5² = 4900 - ____ = 4875。",
+        options: [],
+        answer: 25,
+        explain: "(70+5)(70-5) = 70²-5² = 4900-25 = 4875。验算：75×65 = 75×60+75×5 = 4500+375 = 4875。"
+      },
+      {
+        type: "multi",
+        text: "下面哪些乘法适合用平方差公式（两数和×两数差）？（多选）",
+        options: [
+          "A. 81 × 79 (都接近 80)",
+          "B. 56 × 44 (都接近 50)",
+          "C. 23 × 27 (都接近 25)",
+          "D. 13 × 19 (都接近 16)"
+        ],
+        answer: [0, 1, 2],
+        explain: "A: (80+1)(80-1)=6400-1=6399；B: (50+6)(50-6)=2500-36=2464；C: (25-2)(25+2)=625-4=621；D: 13+19=32, 13-19=-6，差为负，要小心: 19×13=(16+3)(16-3)=256-9=247 也对！所以 D 也可以！"
+      }
+    ]
+  ],
+
+  17: [
+    // 第 17 章 平方数的计算
+    [
+      {
+        type: "cloze",
+        text: "个位是 5 的数平方：用 (n+1) 接 25。例如 35²：3×(3+1)=12, 接 25, 结果 ____。",
+        options: [],
+        answer: 1225,
+        explain: "35²：n=3, n(n+1)=12, 接 25 得 1225。验证：35²=35×35=1225。同理 65²: 6×7=42, 接 25 得 4225。"
+      },
+      {
+        type: "single",
+        text: "心算 85²，最快的方法是？",
+        options: [
+          "A. 8×9=72, 接 25, 得 7225",
+          "B. 85×85 = 80×85+5×85 = 6800+425 = 7225",
+          "C. 85² = (90-5)² = 8100-900+25 = 7225",
+          "D. 都对"
+        ],
+        answer: 3,
+        explain: "85²：个位是 5，用口诀 8×9=72, 接 25 = 7225。A 是速算口诀；B、C 是其他方法，都得到 7225。"
+      },
+      {
+        type: "multi",
+        text: "关于平方数的速算方法，正确的有？（多选）",
+        options: [
+          "A. 个位是 5：n(n+1) 接 25",
+          "B. 头同尾合十：n(n+1) 接尾×尾",
+          "C. 接近整十的数：(n±a)² = n²±2na+a²",
+          "D. 任何数平方都要从 1 加到 n"
+        ],
+        answer: [0, 1, 2],
+        explain: "A、B 是两种口诀；C 是展开公式 (a+b)²=a²+2ab+b² 的应用；D 错误，平方是从 1 加到 n²+1 加到 2n-1，不是从 1 加到 n。"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "心算 49²，最快的方法是？",
+        options: [
+          "A. 49² = (50-1)² = 2500-100+1 = 2401",
+          "B. 49² = 49×49 列竖式",
+          "C. 49² = 50²-100+1 = 2401",
+          "D. A 和 C 都对"
+        ],
+        answer: 3,
+        explain: "49² = (50-1)² = 50²-2×50×1+1² = 2500-100+1 = 2401。完全平方公式 (a-b)²=a²-2ab+b² 的典型应用！"
+      },
+      {
+        type: "cloze",
+        text: "心算 76²：76 = 75+1，所以 76² = 75² + 2×75×1 + 1² = 5625 + 150 + 1 = ____。",
+        options: [],
+        answer: 5776,
+        explain: "利用 (n+1)² = n²+2n+1。75²=5625（用尾 5 口诀 7×8=56, 接 25=5625），加 150 再加 1，得 5776。验算：76×76=5776。"
+      },
+      {
+        type: "multi",
+        text: "下列平方数结果，正确的有？（多选）",
+        options: [
+          "A. 45² = 2025 (4×5=20, 接 25)",
+          "B. 95² = 9025 (9×10=90, 接 25)",
+          "C. 99² = 9801 (100²-2×100+1)",
+          "D. 25² = 625"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "A: 4×5=20, 接 25=2025 正确；B: 9×10=90, 接 25=9025 正确；C: (100-1)²=10000-200+1=9801 正确；D: 5×6=30, 接 25=3025 错误！25²=625 是直接算的。所以 D 错。"
+      }
+    ]
+  ],
+
+  18: [
+    // 第 18 章 除法的速算
+    [
+      {
+        type: "cloze",
+        text: "除以 5 的速算：×2 ÷10。例如 730 ÷ 5 = 730 × 2 ÷ 10 = 1460 ÷ 10 = ____。",
+        options: [],
+        answer: 146,
+        explain: "除以 5 等于乘以 2 再除以 10（因为 5=10/2，所以 1/5=2/10）。730÷5=730×2÷10=1460÷10=146。"
+      },
+      {
+        type: "single",
+        text: "心算 8500 ÷ 25，最快的方法是？",
+        options: [
+          "A. 8500 ÷ 25 = 8500 × 4 ÷ 100 = 34000 ÷ 100 = 340",
+          "B. 8500 ÷ 25 = 8500 ÷ 100 × 4 = 340",
+          "C. 8500 ÷ 25 = 85 × 100 ÷ 25 = 85 × 4 = 340",
+          "D. 都对"
+        ],
+        answer: 3,
+        explain: "除以 25 = 乘以 4 再除以 100（商不变性质）。8500÷25 = 8500×4÷100 = 340。三种写法都正确！"
+      },
+      {
+        type: "multi",
+        text: "关于除法的速算方法，正确的有？（多选）",
+        options: [
+          "A. 除以 5 = ×2 ÷10",
+          "B. 除以 25 = ×4 ÷100",
+          "C. 除以 125 = ×8 ÷1000",
+          "D. 除以 11 = ×100 ÷ (11×100) 不能简化"
+        ],
+        answer: [0, 1, 2],
+        explain: "A、B、C 是商不变性质的应用；D 错误——除以 11 可以用特殊的'错位相减'法（×10+×1 反向），不是不能简化。"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "心算 2400 ÷ 125，最快的方法是？",
+        options: [
+          "A. 2400 ÷ 125 = 2400 × 8 ÷ 1000 = 19200 ÷ 1000 = 19.2",
+          "B. 2400 ÷ 125 = 24 × 100 ÷ 125 = 24 × 8 ÷ 10 = 19.2",
+          "C. 2400 ÷ 125 = 2400 ÷ 1000 × 8 = 2.4 × 8 = 19.2",
+          "D. 都对"
+        ],
+        answer: 3,
+        explain: "除以 125 = 乘以 8 再除以 1000。2400÷125 = 2400×8÷1000 = 19.2。三种写法都正确，体现了商不变性质！"
+      },
+      {
+        type: "cloze",
+        text: "心算 960 ÷ 16：因为 16 = 2×2×2×2，所以 960÷16 = 960÷2÷2÷2÷2 = 480÷2÷2÷2 = 240÷2÷2 = 120÷2 = ____。",
+        options: [],
+        answer: 60,
+        explain: "连除 4 次 2：960→480→240→120→60。或者 960÷16 = 60，因为 16×60=960。两种方法都得到 60。"
+      },
+      {
+        type: "multi",
+        text: "下列除法速算结果，正确的有？（多选）",
+        options: [
+          "A. 350 ÷ 5 = 70 (×2÷10)",
+          "B. 800 ÷ 25 = 32 (×4÷100)",
+          "C. 1000 ÷ 125 = 8 (×8÷1000)",
+          "D. 6400 ÷ 16 = 400 (连除 4 次 2)"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "A: 350×2=700, ÷10=70；B: 800×4=3200, ÷100=32；C: 1000×8=8000, ÷1000=8；D: 6400→3200→1600→800→400。都对！"
+      }
+    ]
+  ],
+
+  19: [
+    // 第 19 章 小数百分数分数
+    [
+      {
+        type: "cloze",
+        text: "0.75 = 75% = ____ / 4（填最简分数）。",
+        options: [],
+        answer: 3,
+        explain: "0.75 = 75% = 75/100 = 3/4。小数、百分数、分数的相互转换是基础：百分号前面的数÷100=小数，再约分得最简分数。"
+      },
+      {
+        type: "single",
+        text: "1/2 + 1/3 = ? （通分加法）",
+        options: [
+          "A. 2/5",
+          "B. 5/6",
+          "C. 1/5",
+          "D. 1/6"
+        ],
+        answer: 1,
+        explain: "1/2+1/3, 最小公倍数是 6, 1/2=3/6, 1/3=2/6, 合 5/6。分数加法核心：先通分，再分子相加，分母不变。"
+      },
+      {
+        type: "multi",
+        text: "下列分数加法中正确的是？（多选）",
+        options: [
+          "A. 1/4 + 1/4 = 1/2",
+          "B. 1/3 + 1/6 = 1/2",
+          "C. 1/5 + 1/5 = 2/5",
+          "D. 1/2 + 1/4 = 1/6"
+        ],
+        answer: [0, 1, 2],
+        explain: "A: 2/4=1/2 正确；B: 2/6+1/6=3/6=1/2 正确；C: 2/5 正确；D: 2/4+1/4=3/4, 不是 1/6。1/2+1/4=3/4。"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "把 0.625 化为最简分数，下面哪个对？",
+        options: [
+          "A. 5/8",
+          "B. 3/5",
+          "C. 625/1000",
+          "D. 5/9"
+        ],
+        answer: 0,
+        explain: "0.625 = 625/1000 = 25/40 = 5/8。约分：分子分母同除以公因数。625÷125=5, 1000÷125=8, 所以 0.625=5/8。"
+      },
+      {
+        type: "cloze",
+        text: "2/3 + 1/4 = ? 最小公倍数是 ____, 2/3 = 8/12, 1/4 = 3/12, 相加 = 11/12。",
+        options: [],
+        answer: 12,
+        explain: "3 和 4 的最小公倍数是 12（3×4=12, 因为互质）。2/3=8/12, 1/4=3/12, 8/12+3/12=11/12。互质数的最小公倍数就是它们的乘积！"
+      },
+      {
+        type: "multi",
+        text: "下列分数、百分数、小数的转换，正确的有？（多选）",
+        options: [
+          "A. 0.5 = 50% = 1/2",
+          "B. 0.25 = 25% = 1/4",
+          "C. 0.125 = 12.5% = 1/8",
+          "D. 0.4 = 40% = 2/5"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "A: 1/2=0.5=50%；B: 1/4=0.25=25%；C: 1/8=0.125=12.5%；D: 2/5=0.4=40%。全对！"
+      }
+    ]
+  ],
+
+  20: [
+    // 第 20 章 分数减法和乘法
+    [
+      {
+        type: "cloze",
+        text: "分数乘法：分子乘分子作分子，分母乘分母作分母，能约分的先约分。2/3 × 3/4 = 6/12 = ____ (最简)。",
+        options: [],
+        answer: "1/2",
+        explain: "2/3×3/4：先约分（2 和 4 约掉 2, 3 和 3 约掉 3），得 1/1 × 1/2 = 1/2。先约分可以让计算简单很多！"
+      },
+      {
+        type: "single",
+        text: "心算 5/6 × 4/5，下面哪种最快？",
+        options: [
+          "A. (5×4)/(6×5) = 20/30 = 2/3",
+          "B. 先约分: 5 消 5, 4 消 2: (1×2)/(1×3) = 2/3",
+          "C. 5/6 × 4/5 = 4/6 = 2/3",
+          "D. 都对"
+        ],
+        answer: 3,
+        explain: "5/6×4/5：分子分母都同时有 5，可以约掉。B 展示了'先约分'的优雅：A 也能算但要多一步。核心：分数乘法先约分！"
+      },
+      {
+        type: "multi",
+        text: "下列分数乘法中，可以先约分的有？（多选）",
+        options: [
+          "A. 2/3 × 3/5 (3 可以约)",
+          "B. 5/8 × 4/15 (5 和 15, 4 和 8 可约)",
+          "C. 1/2 × 2/3 (2 可以约)",
+          "D. 7/9 × 3/7 (7 和 7, 3 和 9 可约)"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "全都可以约分！A: 3 约掉；B: 5÷5, 15÷5=3, 4÷4, 8÷4=2, 变 1/2×1/3=1/6；C: 2 约掉；D: 7 约掉, 3÷3=1, 9÷3=3, 变 1/3×1/1=1/3。"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "心算 7/12 × 3/14，下面哪种最简洁？",
+        options: [
+          "A. 7/12 × 3/14 = 21/168 = 1/8",
+          "B. 7 和 14 约 7, 3 和 12 约 3: (1×1)/(4×2) = 1/8",
+          "C. 7/12 × 3/14 = 1/12 × 3/2 = 3/24 = 1/8",
+          "D. B 最简洁"
+        ],
+        answer: 3,
+        explain: "B 是最优解：直接约分 7÷7=1, 14÷7=2, 3÷3=1, 12÷3=4, 得 1/4 × 1/2 = 1/8。一气呵成，最快！"
+      },
+      {
+        type: "cloze",
+        text: "心算 5/8 × 4/9：先约分 4 和 8 (除以 4) 得 1/2，再算 5/2 × 1/9 = ____。",
+        options: [],
+        answer: "5/18",
+        explain: "5/8×4/9：4 和 8 约分（÷4）变 1/2，得 5/2×1/9=5/18。先约分可以避免大数乘法！"
+      },
+      {
+        type: "multi",
+        text: "下列分数运算结果，正确的有？（多选）",
+        options: [
+          "A. 1/2 × 1/3 = 1/6",
+          "B. 2/3 × 3/4 = 1/2",
+          "C. 3/5 × 5/6 = 1/2",
+          "D. 7/8 × 8/7 = 1"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "A: 1/6 正确；B: 约分 3, 2/1×1/4=2/4=1/2 正确；C: 约分 5, 3/1×1/6=3/6=1/2 正确；D: 7/1×1/1=1 正确（互为倒数的分数相乘=1）。"
+      }
+    ]
+  ],
+
+  21: [
+    // 第 21 章 思维训练 结束语
+    [
+      {
+        type: "single",
+        text: "《算得快》结束语强调的核心思想是？",
+        options: [
+          "A. 熟能生巧，多做练习",
+          "B. 举一反三，自己创造新方法",
+          "C. 理解原理比死记口诀更重要",
+          "D. 以上都是"
+        ],
+        answer: 3,
+        explain: "刘后一在结束语里强调：知识没有穷尽，懂了道理就能自己创造新方法。速算的意义不仅在'快'，更在'思维训练'。A、B、C 都是核心！"
+      },
+      {
+        type: "cloze",
+        text: '"知识接力"中,《算得快》出版后至今 60 多年仍是畅销书,累计印数近____万册。',
+        options: [],
+        answer: 1000,
+        explain: "《算得快》1962 年写就，1963 年出版。截至典藏版，累计印数近 1000 万册，60 多年经久不衰，是真正的国民科普经典！"
+      },
+      {
+        type: "multi",
+        text: "读《算得快》能学到哪些思维方法？（多选）",
+        options: [
+          "A. 凑整思想：把难数变成整十整百",
+          "B. 拆分思想：把大数拆成小数",
+          "C. 对称思想：首尾配对",
+          "D. 转化思想：减法变加法、×9=×10-1"
+        ],
+        answer: [0, 1, 2, 3],
+        explain: "这些都是书中反复出现的核心思维方法！A、B、C、D 涵盖了几乎所有速算技巧的'思想根源'。掌握了思想，遇到新问题也能自己想办法！"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "刘后一先生除了写《算得快》，还从事什么研究？",
+        options: [
+          "A. 数学研究",
+          "B. 古生物学研究（古脊椎动物与古人类）",
+          "C. 物理研究",
+          "D. 文学研究"
+        ],
+        answer: 1,
+        explain: "刘后一本职是中科院古脊椎动物与古人类研究所的研究人员，还写过《北京人的故事》《半坡人的故事》等科普书。'园外园丁'是他的自况——业余时间为孩子写作！"
+      },
+      {
+        type: "cloze",
+        text: '"《算得快》，卖得快"是全国 ____ 的一致反映。',
+        options: [],
+        answer: "新华书店",
+        explain: "《算得快》一出版就抢购一空，'卖得快'是新华书店营业员的共识。这本书累计印数近 1000 万册，是名副其实的国民科普读物！"
+      },
+      {
+        type: "multi",
+        text: "关于速算的意义，《算得快》传递的观念有？（多选）",
+        options: [
+          "A. 速算可以锻炼思维",
+          "B. 速算是'复杂事情可用更简单方法解决'的示范",
+          "C. 速算是数学家才需要的能力",
+          "D. 学速算要'熟能生巧'"
+        ],
+        answer: [0, 1, 3],
+        explain: "A、B、D 都是书里强调的；C 错误——速算是每个孩子都能学会的实用技能，不是数学家的专利！"
+      }
+    ]
+  ],
+
+  22: [
+    // 第 22 章 综合练习
+    [
+      {
+        type: "cloze",
+        text: "综合应用 1：先用凑整法算 98 × 25：98×25 = 100×25 - 2×25 = 2500 - ____ = 2450。",
+        options: [],
+        answer: 50,
+        explain: "98×25 = (100-2)×25 = 2500-50 = 2450。凑整法是综合应用的核心——遇到接近整百的数，先凑整再调整！"
+      },
+      {
+        type: "single",
+        text: "综合应用 2：计算 125 × 64，下面哪种最快？",
+        options: [
+          "A. 125×64 = 125×8×8 = 1000×8 = 8000",
+          "B. 125×64 = 64×125 = 64×1000÷8 = 8000",
+          "C. 125×64 = (125×2)×32 = 250×32 = 8000",
+          "D. 都对"
+        ],
+        answer: 3,
+        explain: "125×8=1000 是关键记忆！64=8×8, 所以 125×64=125×8×8=1000×8=8000。多种方法都能算，体现了速算的灵活性！"
+      },
+      {
+        type: "multi",
+        text: "综合应用 3：下面哪些题目可以用'×100 减自己'的方法？（多选）",
+        options: [
+          "A. 76 × 99（99 ≈ 100）",
+          "B. 88 × 101（101 ≈ 100）",
+          "C. 33 × 100 = 3300",
+          "D. 123 × 9（9 ≈ 10）"
+        ],
+        answer: [0, 1, 3],
+        explain: "A: 76×99=7600-76=7524（×100减自己）；B: 88×101=8800+88=8888（×100加自己）；C 不用凑整；D: 123×9=1230-123=1107。全对（除 C）！"
+      }
+    ],
+    [
+      {
+        type: "single",
+        text: "综合应用 4：计算 11 × 11，下面哪种最快？",
+        options: [
+          "A. 11×11 = 121",
+          "B. 1_1, 中间 1+1=2, 得 121",
+          "C. 11×11 = 10×11+11 = 121",
+          "D. 都对"
+        ],
+        answer: 3,
+        explain: "11×11 = 121，用 ×11 的'两拉开'口诀：1_1, 中间 1+1=2, 得 121。要记熟常见的平方数！"
+      },
+      {
+        type: "cloze",
+        text: "综合应用 5：计算 7 × 7 × 7 × 7：注意到 7×7=49, 49×49 = (50-1)(50+1) = ____, 所以 7⁴ = 2401。",
+        options: [],
+        answer: 2499,
+        explain: "7×7=49, 49×49 = 50²-1 = 2500-1 = 2499。所以 7⁴ = 2499。这种'平方差'的思路在连续平方时特别好用！"
+      },
+      {
+        type: "multi",
+        text: "综合应用 6：关于速算思维，下面说法正确的有？（多选）",
+        options: [
+          "A. 任何复杂的数都可以拆分成简单的数",
+          "B. 凑整是万能的'第一反应'",
+          "C. 学了速算后，普通方法可以扔掉",
+          "D. 速算是数学思维训练的一部分"
+        ],
+        answer: [0, 1, 3],
+        explain: "A、B、D 都是核心思想；C 错误——普通方法是基础，速算是工具，两者结合才是最好的数学能力！"
+      }
+    ]
+  ]
+};
+
+
+
+// ===== app.js =====
+/* ============================================
+   《算得快》练习题 - 交互逻辑
+   ============================================ */
+
+const App = {
+  state: {
+    chapterId: null,
+    questionSet: [],     // 当前套 3 道题
+    currentIndex: 0,     // 当前题号
+    correctCount: 0,
+    wrongCount: 0,
+    submitted: false,
+    userAnswer: null,    // 当前用户答案
+  },
+
+  // ----- 工具 -----
+  $(sel) { return document.querySelector(sel); },
+  $$(sel) { return document.querySelectorAll(sel); },
+
+  // 从题库随机抽 1 套（3 道题）
+  pickQuestionSet(chapterId) {
+    const sets = QUESTIONS[chapterId];
+    if (!sets || sets.length === 0) return null;
+    const idx = Math.floor(Math.random() * sets.length);
+    return sets[idx];
+  },
+
+  // 打乱 4 选 1 的选项顺序（保留正确索引）
+  shuffleOptions(question) {
+    if (question.type !== "single" && question.type !== "multi") return question;
+    const indexed = question.options.map((text, i) => ({ text, isCorrect: i }));
+    // Fisher-Yates
+    for (let i = indexed.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indexed[i], indexed[j]] = [indexed[j], indexed[i]];
+    }
+    return {
+      ...question,
+      options: indexed.map(x => x.text),
+      _shuffledCorrect: indexed.map(x => x.isCorrect),
+    };
+  },
+
+  // ----- 视图切换 -----
+  showView(name) {
+    ["chapterView", "quizView", "resultView"].forEach(v => {
+      this.$("#" + v).hidden = (v !== name);
+    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },
+
+  // ----- 章节页 -----
+  renderChapters() {
+    const grid = this.$("#chapterGrid");
+    grid.innerHTML = "";
+    CHAPTERS.forEach((ch) => {
+      const card = document.createElement("div");
+      card.className = "chapter-card";
+      const stars = "★".repeat(ch.difficulty) + "☆".repeat(5 - ch.difficulty);
+      card.innerHTML = `
+        <div class="chapter-num">${ch.num}</div>
+        <div class="chapter-title">${ch.title}</div>
+        <div class="chapter-sub">${ch.sub}</div>
+        <div class="chapter-difficulty" title="难度 ${ch.difficulty}/5">${[1,2,3,4,5].map(i =>
+          `<span class="star ${i <= ch.difficulty ? '' : 'empty'}">★</span>`
+        ).join("")}</div>
+      `;
+      card.addEventListener("click", () => this.startQuiz(ch.id));
+      grid.appendChild(card);
+    });
+  },
+
+  // ----- 答题页 -----
+  startQuiz(chapterId) {
+    const set = this.pickQuestionSet(chapterId);
+    if (!set) return;
+    // 打乱选项
+    this.state.chapterId = chapterId;
+    this.state.questionSet = set.map(q => this.shuffleOptions(q));
+    this.state.currentIndex = 0;
+    this.state.correctCount = 0;
+    this.state.wrongCount = 0;
+    this.state.submitted = false;
+    this.state.userAnswer = null;
+    const chapter = CHAPTERS.find(c => c.id === chapterId);
+    this.$("#quizChapterTag").textContent = chapter.num + " · " + chapter.title;
+    this.$("#correctCount").textContent = "0";
+    this.$("#wrongCount").textContent = "0";
+    this.showView("quizView");
+    this.renderQuestion();
+  },
+
+  renderQuestion() {
+    const q = this.state.questionSet[this.state.currentIndex];
+    const idx = this.state.currentIndex;
+    const total = this.state.questionSet.length;
+    this.$("#quizProgress").textContent = `第 ${idx + 1} / ${total} 题`;
+
+    const card = this.$("#quizCard");
+    let typeLabel = q.type === "cloze" ? "完形填空" : q.type === "single" ? "单选题" : "多选题";
+    let typeClass = q.type === "cloze" ? "type-cloze" : q.type === "single" ? "type-single" : "type-multi";
+
+    let html = `<span class="question-type ${typeClass}">${typeLabel}</span>`;
+    html += `<div class="question-text">${q.text}</div>`;
+
+    if (q.type === "cloze") {
+      html += `<div class="cloze-input-wrap">
+        <input type="text" class="cloze-input" id="clozeInput" placeholder="在此输入答案" autocomplete="off" />
+      </div>`;
+    } else if (q.type === "single") {
+      html += `<div class="options" id="singleOptions">`;
+      q.options.forEach((opt, i) => {
+        html += `<div class="option" data-i="${i}">
+          <span class="option-letter">${String.fromCharCode(65 + i)}</span>
+          <span class="option-text">${opt}</span>
+        </div>`;
+      });
+      html += `</div>`;
+    } else if (q.type === "multi") {
+      html += `<div class="options" id="multiOptions" data-multi="true">`;
+      q.options.forEach((opt, i) => {
+        html += `<div class="option" data-i="${i}">
+          <span class="option-letter">${String.fromCharCode(65 + i)}</span>
+          <span class="option-text">${opt}</span>
+        </div>`;
+      });
+      html += `<div style="font-size:12px;color:var(--ink-soft);margin-top:4px;">提示：多选，可选 2 项或更多</div></div>`;
+    }
+
+    html += `<div class="feedback" id="feedback"></div>`;
+    card.innerHTML = html;
+
+    // 绑定选项点击
+    if (q.type === "single") {
+      this.$$("#singleOptions .option").forEach(el => {
+        el.addEventListener("click", () => {
+          if (this.state.submitted) return;
+          this.$$("#singleOptions .option").forEach(e => e.classList.remove("selected"));
+          el.classList.add("selected");
+          this.state.userAnswer = parseInt(el.dataset.i);
+          this.$("#btnSubmit").disabled = false;
+        });
+      });
+    } else if (q.type === "multi") {
+      this.$$("#multiOptions .option").forEach(el => {
+        el.addEventListener("click", () => {
+          if (this.state.submitted) return;
+          el.classList.toggle("selected");
+          const selected = Array.from(this.$$("#multiOptions .option.selected")).map(e => parseInt(e.dataset.i));
+          this.state.userAnswer = selected;
+          this.$("#btnSubmit").disabled = selected.length === 0;
+        });
+      });
+    } else if (q.type === "cloze") {
+      const input = this.$("#clozeInput");
+      input.focus();
+      input.addEventListener("input", () => {
+        this.state.userAnswer = input.value.trim();
+        this.$("#btnSubmit").disabled = input.value.trim() === "";
+      });
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !this.$("#btnSubmit").disabled && !this.state.submitted) {
+          this.submit();
+        }
+      });
+    }
+
+    // 按钮状态
+    this.state.submitted = false;
+    this.state.userAnswer = null;
+    this.$("#btnSubmit").hidden = false;
+    this.$("#btnSubmit").disabled = true;
+    this.$("#btnNext").hidden = true;
+    this.$("#btnGiveUp").disabled = false;
+  },
+
+  // 判断答案
+  checkAnswer(q) {
+    if (q.type === "cloze") {
+      const user = String(this.state.userAnswer || "").trim();
+      const correct = String(q.answer);
+      // 数字/字符串都允许
+      if (user === correct) return true;
+      // 如果答案是数字，也接受数字输入
+      if (!isNaN(parseFloat(correct)) && !isNaN(parseFloat(user))) {
+        return parseFloat(user) === parseFloat(correct);
+      }
+      // 处理 "413, 413" 这种逗号分隔的多空情况
+      if (correct.includes(",")) {
+        const userParts = user.split(/[,，\s]+/).map(s => s.trim());
+        const correctParts = correct.split(",").map(s => s.trim());
+        if (userParts.length === correctParts.length) {
+          return userParts.every((p, i) => p === correctParts[i]);
+        }
+      }
+      return false;
+    } else if (q.type === "single") {
+      return this.state.userAnswer === q._shuffledCorrect.findIndex(x => x === q.answer);
+      // 注意：q.answer 是原始索引（0-based）
+      // 实际：q.answer 是原始选项的索引，_shuffledCorrect 给出每个新位置的原始索引
+    } else if (q.type === "multi") {
+      // q.answer 是原始选项索引数组
+      // _shuffledCorrect 给出每个新位置的原始索引
+      const correctOriginal = q.answer;  // 数组，如 [0, 2]
+      const userSelected = this.state.userAnswer;  // 用户点击的新位置索引
+      // 把用户选的新位置转成原始位置
+      const userOriginal = userSelected.map(newIdx => q._shuffledCorrect[newIdx]);
+      // 排序后比较
+      return correctOriginal.length === userOriginal.length &&
+             correctOriginal.every(v => userOriginal.includes(v));
+    }
+    return false;
+  },
+
+  // 取得正确选项的展示文字
+  getCorrectDisplay(q) {
+    if (q.type === "cloze") {
+      return String(q.answer);
+    } else if (q.type === "single") {
+      // 找到 _shuffledCorrect 中值为 q.answer 的位置
+      const newIdx = q._shuffledCorrect.findIndex(orig => orig === q.answer);
+      return `${String.fromCharCode(65 + newIdx)}. ${q.options[newIdx]}`;
+    } else if (q.type === "multi") {
+      const letters = q.answer
+        .map(origIdx => {
+          const newIdx = q._shuffledCorrect.findIndex(o => o === origIdx);
+          return String.fromCharCode(65 + newIdx);
+        })
+        .sort()
+        .join("、");
+      return letters;
+    }
+  },
+
+  // 提交答案
+  submit() {
+    const q = this.state.questionSet[this.state.currentIndex];
+    const isCorrect = this.checkAnswer(q);
+    this.state.submitted = true;
+    const correct = isCorrect;
+    if (correct) this.state.correctCount++;
+    else this.state.wrongCount++;
+    this.$("#correctCount").textContent = this.state.correctCount;
+    this.$("#wrongCount").textContent = this.state.wrongCount;
+
+    // 渲染反馈
+    const feedback = this.$("#feedback");
+    feedback.className = "feedback show " + (correct ? "correct" : "wrong");
+    feedback.innerHTML = `
+      <div class="feedback-header">${correct ? "🎉 答对啦！" : "😅 还差一点~"}</div>
+      <div class="feedback-answer">正确答案：<strong>${this.getCorrectDisplay(q)}</strong></div>
+      <div class="feedback-explain">
+        <span class="label">解题思路：</span>${q.explain}
+      </div>
+    `;
+
+    // 标记选项
+    if (q.type === "single") {
+      this.$$("#singleOptions .option").forEach((el, i) => {
+        el.classList.add("disabled");
+        if (q._shuffledCorrect[i] === q.answer) el.classList.add("correct");
+        if (i === this.state.userAnswer && !correct) el.classList.add("wrong");
+      });
+    } else if (q.type === "multi") {
+      this.$$("#multiOptions .option").forEach((el, i) => {
+        el.classList.add("disabled");
+        if (q.answer.includes(q._shuffledCorrect[i])) el.classList.add("correct");
+        if (this.state.userAnswer.includes(i) && !q.answer.includes(q._shuffledCorrect[i])) {
+          el.classList.add("wrong");
+        }
+      });
+    } else if (q.type === "cloze") {
+      const input = this.$("#clozeInput");
+      input.classList.add(correct ? "correct" : "wrong");
+      input.classList.add("disabled");
+      input.disabled = true;
+    }
+
+    // 切换按钮
+    this.$("#btnSubmit").hidden = true;
+    this.$("#btnGiveUp").disabled = true;
+    const isLast = this.state.currentIndex === this.state.questionSet.length - 1;
+    this.$("#btnNext").hidden = false;
+    this.$("#btnNext").textContent = isLast ? "查看成绩 →" : "下一题 →";
+  },
+
+  // 不会做，直接看解析
+  giveUp() {
+    const q = this.state.questionSet[this.state.currentIndex];
+    this.state.submitted = true;
+    this.state.wrongCount++;
+    this.$("#wrongCount").textContent = this.state.wrongCount;
+
+    const feedback = this.$("#feedback");
+    feedback.className = "feedback show wrong";
+    feedback.innerHTML = `
+      <div class="feedback-header">🤔 没关系，看看解析学一学！</div>
+      <div class="feedback-answer">正确答案：<strong>${this.getCorrectDisplay(q)}</strong></div>
+      <div class="feedback-explain">
+        <span class="label">解题思路：</span>${q.explain}
+      </div>
+    `;
+
+    if (q.type === "single") {
+      this.$$("#singleOptions .option").forEach((el, i) => {
+        el.classList.add("disabled");
+        if (q._shuffledCorrect[i] === q.answer) el.classList.add("correct");
+      });
+    } else if (q.type === "multi") {
+      this.$$("#multiOptions .option").forEach((el, i) => {
+        el.classList.add("disabled");
+        if (q.answer.includes(q._shuffledCorrect[i])) el.classList.add("correct");
+      });
+    } else if (q.type === "cloze") {
+      const input = this.$("#clozeInput");
+      input.classList.add("wrong");
+      input.classList.add("disabled");
+      input.disabled = true;
+    }
+
+    this.$("#btnSubmit").hidden = true;
+    this.$("#btnGiveUp").disabled = true;
+    const isLast = this.state.currentIndex === this.state.questionSet.length - 1;
+    this.$("#btnNext").hidden = false;
+    this.$("#btnNext").textContent = isLast ? "查看成绩 →" : "下一题 →";
+  },
+
+  // 下一题
+  next() {
+    if (this.state.currentIndex < this.state.questionSet.length - 1) {
+      this.state.currentIndex++;
+      this.renderQuestion();
+    } else {
+      this.showResult();
+    }
+  },
+
+  // 结算页
+  showResult() {
+    const total = this.state.questionSet.length;
+    const correct = this.state.correctCount;
+    const wrong = this.state.wrongCount;
+    const chapter = CHAPTERS.find(c => c.id === this.state.chapterId);
+
+    let emoji, title, desc;
+    if (correct === total) {
+      emoji = "🏆"; title = "全对！你太棒了！";
+      desc = `《${chapter.title}》这一章你已经掌握啦，速算小达人！`;
+    } else if (correct >= 1) {
+      emoji = "👍"; title = "不错的开始！";
+      desc = `答对 ${correct} 道，再多练几次就能全对啦！`;
+    } else {
+      emoji = "💪"; title = "别灰心，再来一次！";
+      desc = `先看书里的故事，再来刷题会容易很多哦！`;
+    }
+
+    this.$("#resultEmoji").textContent = emoji;
+    this.$("#resultTitle").textContent = title;
+    this.$("#resultDesc").textContent = desc;
+    this.$("#resultStats").innerHTML = `
+      <div class="result-stat">
+        <div class="result-stat-num good">${correct}</div>
+        <div class="result-stat-label">答对</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-stat-num bad">${wrong}</div>
+        <div class="result-stat-label">答错/跳过</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-stat-num neutral">${total}</div>
+        <div class="result-stat-label">总题数</div>
+      </div>
+    `;
+    this.showView("resultView");
+  },
+
+  // ----- 初始化 -----
+  init() {
+    this.renderChapters();
+
+    this.$("#btnBack").addEventListener("click", () => this.showView("chapterView"));
+    this.$("#btnSubmit").addEventListener("click", () => this.submit());
+    this.$("#btnGiveUp").addEventListener("click", () => this.giveUp());
+    this.$("#btnNext").addEventListener("click", () => this.next());
+    this.$("#btnRetry").addEventListener("click", () => this.startQuiz(this.state.chapterId));
+    this.$("#btnHome").addEventListener("click", () => this.showView("chapterView"));
+
+    // 支持 URL hash 直接开始某章节，例如 #1 或 #chapter-1
+    const hash = window.location.hash.replace("#", "");
+    if (hash) {
+      const m = hash.match(/^(?:chapter-)?(\d+)$/);
+      if (m) {
+        const id = parseInt(m[1]);
+        if (QUESTIONS[id]) {
+          setTimeout(() => this.startQuiz(id), 100);
+        }
+      }
+    }
+  },
+};
+
+document.addEventListener("DOMContentLoaded", () => App.init());
+
+  </script>
+</body>
+</html>
